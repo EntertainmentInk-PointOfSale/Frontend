@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.button-cell {
+    text-align: center;
+}
+
+td:nth-child(1){
+    color:grey;
+}
+
+td:nth-child(2) {
+    font-weight: bold;
+}
+
+tbody {
+    font-size: smaller;
+}
