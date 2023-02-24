@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table'
 import Button  from 'react-bootstrap/Button';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Modal } from 'react-bootstrap';
 
 import './Customer.css';
 
@@ -13,6 +13,11 @@ import './Customer.css';
 function CustomerCard(props) {
 
     const [customer, setCustomer] = useState(0);
+
+    const [showEditPersonal, setShowEditPersonal] = useState(false);
+
+    const handleCloseEditPersonal = () => setShowEditPersonal(false);
+    const handleOpenEditPersonal  = () => setShowEditPersonal(true);
 
     useEffect(() => {
         axios(
@@ -68,9 +73,54 @@ function CustomerCard(props) {
                                     </tr>
                                 </tbody>
                             </Table>
-                            <div className="col text-center">
+
+                            <div className="col text-center" onClick={handleOpenEditPersonal}>
                                 <Button variant="outline-primary">Edit Details</Button>
                             </div> 
+
+                            <Modal show={showEditPersonal} onHide = {handleCloseEditPersonal}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Edit Personal Details</Modal.Title>
+                                </Modal.Header>
+
+                                <Modal.Body>
+                                    <Table size="sm">
+                                        <tbody>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td>{customer.Name}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ID:</td>
+                                                <td>{customer.ID}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>E-Mail:</td>
+                                                <td>{customer.Email}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone:</td>
+                                                <td>{customer.Phone}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Status:</td>
+                                                <td>{customer.Active ? "Active" : "Not Active"}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </Modal.Body>
+
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleCloseEditPersonal}>
+                                        Close
+                                    </Button>
+
+                                    <Button variant="primary" onClick={handleCloseEditPersonal}>
+                                        Save
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+
                         </Card.Body>
                     </Card>
                 </Col>
@@ -121,8 +171,8 @@ function CustomerCard(props) {
             </Row>
         </Container>
         
-        
     );
 }
+
 
 export default CustomerCard
