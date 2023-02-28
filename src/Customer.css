@@ -1,12 +1,32 @@
+/*
 .container {
-    display: flex;
+    display: fluid;
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 20px;
 }
+*/
 
+.Container {
+    column-gap: 20px;
+    row-gap: 20px;
+}
 .button-cell {
     text-align: center;
+}
+
+.top-buffer { margin-top:20px; }
+
+.big-text {
+    white-space: pre-line;
+}
+
+.textarea-row {
+    display: block;
+}
+
+.inline-button {
+    display: inline-block;
 }
 
 td:nth-child(1){
