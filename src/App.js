@@ -7,7 +7,7 @@ import {
   Navbar,
   Nav
 } from 'react-bootstrap'
-import CustomerCard from './Customer';
+import CustomerCard from './Customer/Customer';
 
 function App() {
   return (
