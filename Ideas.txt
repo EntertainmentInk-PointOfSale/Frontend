@@ -1,0 +1,3 @@
+Temp customer page:
+-Search customer by ID
+-Add customer
