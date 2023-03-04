@@ -25,8 +25,6 @@ export function EditNotes(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("Customer Note",props.customer.Note);
-        console.log("New NOTE",Note);
         axios(
             {
                 baseURL: "http://localhost:3001/api",

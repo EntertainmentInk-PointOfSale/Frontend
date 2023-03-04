@@ -6,7 +6,7 @@ import Button  from 'react-bootstrap/Button';
 import { Container, Row, Col} from 'react-bootstrap';
 import {DisplayPersonalDetail, EditPersonalDetail} from './PersonalDetails'
 import {DisplayNotes, EditNotes} from './Notes'
-import {DisplayTaxStatus} from './TaxStatus'
+import {DisplayTaxStatus, EditTaxStatus} from './TaxStatus'
 
 import './Customer.css';
 
@@ -21,6 +21,9 @@ function CustomerCard(props) {
 
     const[editNote, setEditNote] = useState(false);
     const handleSwitchNote = () => {setEditNote(!editNote)}
+
+    const[editTax, setEditTax] = useState(false);
+    const handleSwitchTax = () => {setEditTax(!editTax)}
 
     useEffect(() => {
         axios(
@@ -88,7 +91,16 @@ function CustomerCard(props) {
                     <Card>
                         <Card.Header as="h5">Tax Status</Card.Header>
                         <Card.Body>
-                            <DisplayTaxStatus customer={customer}/>
+                            {editTax ?
+                                <EditTaxStatus
+                                    customer={customer}
+                                    setCustomer={setCustomer}
+                                    handleClickTax={handleSwitchTax}/>
+                                :
+                                <DisplayTaxStatus 
+                                    customer={customer}
+                                    handleClickTax={handleSwitchTax}/>
+                            }
                         </Card.Body>
                     </Card>
                 </Col>
