@@ -4,13 +4,11 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table'
 import Button  from 'react-bootstrap/Button';
 import { Container, Row, Col} from 'react-bootstrap';
-import {DisplayPersonalDetail, EditPersonalDetail} from './PersonalDetails'
-import {DisplayNotes, EditNotes} from './Notes'
-import {DisplayTaxStatus, EditTaxStatus} from './TaxStatus'
+import {DisplayPersonalDetail, EditPersonalDetail} from './CustomerUtility/PersonalDetails'
+import {DisplayNotes, EditNotes} from './CustomerUtility/Notes'
+import {DisplayTaxStatus, EditTaxStatus} from './CustomerUtility/TaxStatus'
 
-import './Customer.css';
-
-
+import './CustomerCard.css';
 
 function CustomerCard(props) {
 

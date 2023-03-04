@@ -5,7 +5,7 @@ import Table  from 'react-bootstrap/Table'
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 
-import './Customer.css';
+import '../CustomerCard.css';
 
 export function DisplayTaxStatus(props) {
     return(

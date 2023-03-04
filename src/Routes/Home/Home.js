@@ -1,6 +1,6 @@
 import React from "react";
 import App from "../../App"
-import CustomerCard from "../Customer/Customer";
+import CustomerCard from "../Customer/CustomerCard";
 
 export default function Home(props) {
     return(
