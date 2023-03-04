@@ -4,7 +4,7 @@ import CustomerCard from "../Customer/Customer";
 
 export default function Home(props) {
     return(
-        <App>
+        <App title="Home">
             <CustomerCard/>
         </App>
     );

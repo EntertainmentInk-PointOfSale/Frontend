@@ -1,9 +1,12 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import {Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
 function App(props) {
+    useEffect(() => {
+        document.title = props.title;
+    },[props.title])
+    
     return (
         <Fragment>
             <header>
