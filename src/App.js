@@ -1,15 +1,18 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react'
+import React, { Fragment } from 'react'
 import {Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
-import CustomerCard from './Customer/Customer';
 
-function App() {
+function App(props) {
     return (
-        <div>
-            <Header/>
-            <CustomerCard/>
-        </div>
+        <Fragment>
+            <header>
+                <Header/>
+            </header>
+            <main>
+                {props.children}
+            </main>
+        </Fragment>
     );
 }
 

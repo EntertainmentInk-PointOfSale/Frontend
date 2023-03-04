@@ -82,7 +82,6 @@ export function EditPersonalDetail(props) {
             }
         )
         .then((response) => {
-            console.log(response.data);
             props.setCustomer(response.data);
             props.handlePersonalClick()
         })
