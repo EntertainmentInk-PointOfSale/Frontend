@@ -1,11 +1,11 @@
 import React from "react";
 import App from "../../App"
-import CustomerCard from "../Customer/CustomerCard";
 
 export default function Home(props) {
     return(
         <App title="Home">
-            <CustomerCard/>
+            <h1 style={{textAlign: "center"}}>🚧 Under Construction 🚧</h1>
+            <h3 style={{textAlign: "center"}}>Made with 🧡 by Callum</h3>
         </App>
     );
 }

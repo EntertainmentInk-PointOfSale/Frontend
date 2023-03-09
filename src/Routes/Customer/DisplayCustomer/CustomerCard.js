@@ -4,9 +4,9 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table'
 import Button  from 'react-bootstrap/Button';
 import { Container, Row, Col} from 'react-bootstrap';
-import {DisplayPersonalDetail, EditPersonalDetail} from './CustomerUtility/PersonalDetails'
-import {DisplayNotes, EditNotes} from './CustomerUtility/Notes'
-import {DisplayTaxStatus, EditTaxStatus} from './CustomerUtility/TaxStatus'
+import {DisplayPersonalDetail, EditPersonalDetail} from './PersonalDetails'
+import {DisplayNotes, EditNotes} from './Notes'
+import {DisplayTaxStatus, EditTaxStatus} from './TaxStatus'
 
 import './CustomerCard.css';
 
@@ -37,6 +37,9 @@ function CustomerCard(props) {
         )
         .then((response) => {
             setCustomer(response.data);
+        })
+        .catch((err) => {
+            console.log("ERROR: ",err)
         })
     }, []);
 
