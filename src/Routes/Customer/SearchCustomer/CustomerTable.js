@@ -21,7 +21,7 @@ export default function CustomerTable({data, columns, initialSorting = () => {}}
         onSortingChange: setSorting,
     })
     return (
-        <Table bordered hover>
+        <Table size={"sm"} bordered hover responsive>
             <thead>
             {table.getHeaderGroups().map(headerGroup => (
                 <tr key={headerGroup.id}>

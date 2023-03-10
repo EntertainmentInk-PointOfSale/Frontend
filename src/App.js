@@ -9,10 +9,8 @@ function App(props) {
     
     return (
         <Fragment>
-            <header>
-                <Header/>
-            </header>
             <main style={{margin: 0, paddingLeft: 20, paddingRight: 20}}>
+                <Header/>
                 {props.children}
             </main>
         </Fragment>
