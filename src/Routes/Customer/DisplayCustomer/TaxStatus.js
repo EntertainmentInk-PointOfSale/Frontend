@@ -5,7 +5,7 @@ import Table  from 'react-bootstrap/Table'
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 
-import '../CustomerCard.css';
+import './CustomerCard.css';
 
 export function DisplayTaxStatus(props) {
     return(
@@ -46,7 +46,7 @@ export function EditTaxStatus(props) {
         axios(
             {
                 baseURL: "http://localhost:3001/api",
-                url: "customer/update_personal/2",
+                url: `customer/update_personal/${props.customer.ID}`,
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
                     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',

@@ -22,7 +22,7 @@ function App(props) {
 function Header() {
 return (
     <Navbar>
-        <Container>
+        <Container fluid>
             <Navbar.Brand href="/">POS</Navbar.Brand>
                 <Nav className="me-auto">
                 <Nav.Link href="#home">Home</Nav.Link>

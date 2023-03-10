@@ -1,18 +1,62 @@
-import {useState,useEffect,useReducer,useMemo,React} from 'react';
-import './SearchCustomer.css'
+import {React,useState,useEffect,} from 'react';
 import axios from 'axios';
-import Table from 'react-bootstrap/Table'
-import Moment from 'react-moment';
 import App from '../../../App';
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
+import Moment from 'react-moment';
 import { Container, Row, Col } from 'react-bootstrap';
-import {flexRender, 
-    getCoreRowModel,
-    useReactTable,
-    getSortedRowModel,
-    getFilteredRowModel} from '@tanstack/react-table'
 
+import CustomerTable from './CustomerTable'
+
+//Helper
+function formatPhoneNumber(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    }
+    return null;
+  }
+
+//Column schema for table
+const columns = [
+    {
+        header: "ID",
+        accessorKey: "ID"
+    },
+    {
+        header: "Name",
+        accessorKey: "Name",
+        enableMultiSorting: true
+    },
+    {
+        header: "Join Date",
+        accessorKey: "Join_Date",
+        cell: props => <Moment date={props.value}  format="YYYY-MM-DD"></Moment>
+    },
+    {
+        header: "Phone",
+        accessorKey: "Phone",
+        enableSorting: false,
+        cell: props => <span>{formatPhoneNumber(props.row.original.Phone) || props.row.original.Phone}</span>
+    },
+    {
+        header: "Email",
+        accessorKey: "Email"
+    },
+    {
+        header: "View",
+        id: "View_Customer",
+        enableSorting: false,
+        cell: props => <Button variant="secondary" size="sm" href={`/customer/id/${props.row.original.ID}`}><b>View</b></Button>
+        
+    }
+]
+
+//Default sorting
+const sorting = [
+    {id: 'Name', desc: false}
+]
 
 export default function SearchCustomer() {
     const [searchResults, setSearchResults] = useState([])
@@ -25,7 +69,7 @@ export default function SearchCustomer() {
 
         var url = `customer/`
 
-        if(searchQuery != "") {
+        if(searchQuery !== "") {
             url += `?${selectType}=${searchQuery}`
         }
 
@@ -51,54 +95,7 @@ export default function SearchCustomer() {
             
         })
     }
-
-    //Table definitions
-    const [sorting, setSorting] = useState([{id: 'Name', desc: false}])
-    const data = useMemo(() => searchResults, [searchResults])
-    const columns = useMemo(() => [
-        {
-            header: "ID",
-            accessorKey: "ID"
-        },
-        {
-            header: "Name",
-            accessorKey: "Name",
-            enableMultiSorting: true
-        },
-        {
-            header: "Join Date",
-            accessorKey: "Join_Date",
-            cell: props => <Moment date={props.value}  format="YYYY-MM-DD"></Moment>
-        },
-        {
-            header: "Phone",
-            accessorKey: "Phone" 
-        },
-        {
-            header: "Email",
-            accessorKey: "Email"
-        },
-        {
-            header: "View",
-            id: "view_button",
-            accessorKey: "ID",
-            enableSorting: false,
-            cell: props => <Button variant="secondary" size="sm" onClick={() => console.log("Hello!")}><b>View</b></Button>
-            
-        }
-    ])
-    const table = useReactTable({
-        data,
-        columns,
-        getCoreRowModel: getCoreRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-        state: {
-            sorting,
-        },
-        onSortingChange: setSorting,
-    })
-
+    
     useEffect(() => {
         axios(
             {
@@ -144,57 +141,8 @@ export default function SearchCustomer() {
                         </Col>
                     </Row>
                 </Form>
-                
                 <Row>
-                    <Table bordered hover>
-                        <thead>
-                        {table.getHeaderGroups().map(headerGroup => (
-                            <tr key={headerGroup.id}>
-                            {headerGroup.headers.map(header => (
-                                <th key={header.id}>
-                                
-                                {
-                                header.isPlaceholder ? null : (
-                                    <div
-                                    {...{
-                                        className: header.column.getCanSort()
-                                          ? 'cursor-pointer select-none'
-                                          : '',
-                                        onClick: header.column.getToggleSortingHandler(),
-                                      }}>
-                                    {flexRender(
-                                        header.column.columnDef.header,
-                                        header.getContext())}
-                                        {
-                                        {
-                                        asc: ' 🔼',
-                                        desc: ' 🔽',
-                                        }[header.column.getIsSorted()] ?? null}
-                                    </div>
-                                )
-                                }
-
-
-
-                                </th>
-                            ))}
-                            </tr>
-                        ))}
-                        </thead>
-                        <tbody>
-                        {
-                        table.getRowModel().rows.map(row => (
-                            <tr key={row.id}>
-                            {row.getVisibleCells().map(cell => (
-                                <td key={cell.id}>
-                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                </td>
-                            ))}
-                            </tr>
-                        ))
-                        }
-                        </tbody>
-                    </Table>
+                    <CustomerTable data={searchResults} columns={columns} initialSorting={sorting}/>
                 </Row>
             </Container>
             
