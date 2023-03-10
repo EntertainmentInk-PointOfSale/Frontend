@@ -12,7 +12,7 @@ function App(props) {
             <header>
                 <Header/>
             </header>
-            <main>
+            <main style={{margin: 0, paddingLeft: 20, paddingRight: 20}}>
                 {props.children}
             </main>
         </Fragment>

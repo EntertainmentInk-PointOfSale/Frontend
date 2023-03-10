@@ -30,9 +30,10 @@ const columns = [
         enableMultiSorting: true
     },
     {
-        header: "Join Date",
+        header: "Join Date", //TODO: Create custom sorting function to sort by DATE
+        id: "Join_Date",
         accessorKey: "Join_Date",
-        cell: props => <Moment date={props.value}  format="YYYY-MM-DD"></Moment>
+        cell: props => <Moment date={props.row.original.Join_Date}  format="YYYY-MM-DD"></Moment>
     },
     {
         header: "Phone",
