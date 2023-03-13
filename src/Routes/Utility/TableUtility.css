@@ -1,0 +1,13 @@
+span.pad-emoji{
+    margin-left: 5px;
+}
+
+span.pad-emoji-less{
+    margin-left: 4px;
+    display: inline;
+}
+
+div.noMargin {
+    margin-left: 0;
+    margin-right: 0;
+}

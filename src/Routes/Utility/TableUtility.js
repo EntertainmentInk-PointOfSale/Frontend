@@ -1,5 +1,5 @@
 import {useState,React} from 'react';
-import './CustomerTable.css'
+import './TableUtility.css'
 import Table from 'react-bootstrap/Table'
 import {flexRender, 
     getCoreRowModel,
@@ -7,7 +7,7 @@ import {flexRender,
     getSortedRowModel,
     getFilteredRowModel} from '@tanstack/react-table'
 
-export default function CustomerTable({data, columns, initialSorting}) {
+export default function TableUtility({data, columns, initialSorting}) {
     const [sorting, setSorting] = useState(initialSorting)
     const table = useReactTable({
         data,
