@@ -1,4 +1,4 @@
-import {useState,React} from 'react';
+import {useState,React, useEffect} from 'react';
 import './CustomerTable.css'
 import Table from 'react-bootstrap/Table'
 import {flexRender, 
@@ -20,6 +20,9 @@ export default function CustomerTable({data, columns, initialSorting}) {
         },
         onSortingChange: setSorting,
     })
+    useEffect(() => {
+        console.log(`new data: ${data}`)
+    },[data])
     return (
         <Table size={"sm"} bordered hover responsive>
             <thead>

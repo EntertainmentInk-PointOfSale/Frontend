@@ -5,6 +5,7 @@ import './index.css';
 import Home from './Routes/Home/Home';
 import SearchCustomer from './Routes/Customer/SearchCustomer/SearchCustomer';
 import CustomerCard from './Routes/Customer/DisplayCustomer/CustomerCard';
+import SearchProduct from './Routes/Product/SearchProduct';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         path: "/customer/id/:id",
         element: <CustomerCard/>
     },
+    {
+        path: "/product",
+        element: <SearchProduct/>
+    }
 ])
 
 root.render(

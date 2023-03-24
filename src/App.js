@@ -23,7 +23,6 @@ return (
         <Container fluid>
             <Navbar.Brand href="/">POS</Navbar.Brand>
                 <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
                 <NavDropdown title="Transactions" id="TransactionDropDown">
                     <NavDropdown.Item>Holder</NavDropdown.Item>
                     <NavDropdown.Item>Holder</NavDropdown.Item>
@@ -32,6 +31,9 @@ return (
                 <NavDropdown title="Customers" id="CustomerDropDown">
                     <NavDropdown.Item href="/customer">Search</NavDropdown.Item>
                     <NavDropdown.Item>Create</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="Products" id="ProductsDropDown">
+                    <NavDropdown.Item href="/product">Search</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
         </Container>
