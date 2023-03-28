@@ -7,7 +7,8 @@ const columns = [
     },
     {
         header: "Name",
-        accessorKey: "product_name"
+        accessorKey: "product_name",
+        id:"Name"
     },
     {
         header: "Price",
