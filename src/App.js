@@ -34,6 +34,7 @@ return (
                 </NavDropdown>
                 <NavDropdown title="Products" id="ProductsDropDown">
                     <NavDropdown.Item href="/product">Search</NavDropdown.Item>
+                    <NavDropdown.Item href="/product/add">Add</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
         </Container>
