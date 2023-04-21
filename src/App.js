@@ -24,7 +24,7 @@ return (
             <Navbar.Brand href="/">POS</Navbar.Brand>
                 <Nav className="me-auto">
                 <NavDropdown title="Transactions" id="TransactionDropDown">
-                    <NavDropdown.Item>Holder</NavDropdown.Item>
+                    <NavDropdown.Item href='/transaction'>Transactions</NavDropdown.Item>
                     <NavDropdown.Item>Holder</NavDropdown.Item>
                     <NavDropdown.Item>Holder</NavDropdown.Item>
                 </NavDropdown>
