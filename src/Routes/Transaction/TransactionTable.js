@@ -8,12 +8,12 @@ const columns = [
     },
     {
         header: "Name",
-        accessorKey: "name",
+        accessorKey: "product_name",
         enableSorting: false
     },
     {
         header: "Tax",
-        accessorKey: "tax_name",
+        accessorKey: "tax_applied.tax_name",
         enableSorting: false
     },
     {
