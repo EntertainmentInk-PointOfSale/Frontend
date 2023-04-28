@@ -1,4 +1,4 @@
-import TableUtility from '../Utility/TableUtility'
+import TableUtility from '../../Utility/TableUtility'
 
 const columns = [
     {
