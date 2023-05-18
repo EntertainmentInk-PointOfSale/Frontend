@@ -30,16 +30,22 @@ export default function TableUtility({data, columns, initialSorting}) {
                         {
                         header.isPlaceholder ? null : (
                             <div
-                            {...{
-                                className: header.column.getCanSort()
-                                    ? 'cursor-pointer select-none'
-                                    : '',
-                                onClick: header.column.getToggleSortingHandler(),
-                                }}>
+                                {
+                                    ...{
+                                    className: header.column.getCanSort()
+                                        ? 'cursor-pointer select-none'
+                                        : '',
+                                    onClick: header.column.getToggleSortingHandler(),
+                                    }
+                                }
+                            >
                                 
-                                {flexRender(
+                                {
+                                    flexRender(
                                         header.column.columnDef.header,
-                                        header.getContext())}
+                                        header.getContext())
+                                }
+                                
                                 {
                                     {
                                         asc: <span className='pad-emoji'>🞁</span>,

@@ -10,7 +10,7 @@ import {DisplayPersonalDetail, EditPersonalDetail} from './PersonalDetails'
 import {DisplayNotes, EditNotes} from './Notes'
 import {DisplayTaxStatus, EditTaxStatus} from './TaxStatus'
 
-import './CustomerCard.css';
+import styles from './style.module.scss';
 
 function CustomerCard(props) {
     //Customer data
@@ -46,7 +46,7 @@ function CustomerCard(props) {
     }, []);
 
     return (
-        <App title={`Customer ${id}`}>
+        <App title={`Customer ${id}`} className='customer-cards'>
             <Container fluid>
                 <Row className="justify-content-center">
                     <Col md={3}>

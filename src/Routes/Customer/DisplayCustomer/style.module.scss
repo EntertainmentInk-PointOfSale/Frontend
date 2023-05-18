@@ -1,21 +1,15 @@
-/*
-.container {
-    display: fluid;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 20px;
-}
-*/
-
 .Container {
     column-gap: 20px;
     row-gap: 20px;
 }
+
 .button-cell {
     text-align: center;
 }
 
-.top-buffer { margin-top:20px; }
+.top-buffer { 
+    margin-top:20px;
+}
 
 .big-text {
     white-space: pre-line;
@@ -29,13 +23,14 @@
     display: inline-block;
 }
 
-td:nth-child(1){
+.header_text {
     color:grey;
 }
 
-td:nth-child(2) {
+.value_text {
     font-weight: bold;
 }
+
 
 tbody {
     font-size: smaller;

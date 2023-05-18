@@ -19,6 +19,7 @@ export default function TransactionHome(props) {
     const [searchQuery, setSearchQuery] = useState();
     const [products, setProducts] = useState([]);
 
+    const [rowSelection, setRowSelection] = useState({});
 
     const [subtotal, setSubtotal] = useState(0.00);
     const [taxTotal, setTaxTotal] = useState(0.00);
@@ -70,6 +71,13 @@ export default function TransactionHome(props) {
         setTotal(sub_temp + tax_temp);
     }, [products])
 
+    const removeSelected = () => {
+        const tempProducts = products;
+        for(const index in rowSelection) {
+            tempProducts.splice(index,1);
+        }
+        setProducts(tempProducts);
+    }
 
     return(
         <App title="Transaction">
@@ -77,7 +85,7 @@ export default function TransactionHome(props) {
                     <Row className='mb-2'>
                         <Col>
                             <div className='transaction-div'>
-                                <TransactionTable data={products}/>
+                                <TransactionTable data={products} rowSelection={rowSelection} setRowSelection={setRowSelection}/>
                             </div>
                         </Col>
                     </Row>
@@ -89,7 +97,7 @@ export default function TransactionHome(props) {
                                     onChange={(e) => setSearchQuery(e.target.value)}/>
                                 </Col>
                                 <Col md="2">
-                                    <Button variant="primary" type="submit" className='w-full'>
+                                    <Button variant="primary" type="submit" style={{width: '100%'}}>
                                         Submit
                                     </Button>
                                 </Col>
@@ -108,7 +116,7 @@ export default function TransactionHome(props) {
                             </Row>
                         </Col>
                         <Col>
-                            CONTROLS
+                            <Button variant="secondary" onClick={() => removeSelected()}>Remove Selected</Button>
                         </Col>
                     </Row>
             </Container>

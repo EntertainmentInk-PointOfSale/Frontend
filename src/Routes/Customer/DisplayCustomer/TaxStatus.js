@@ -5,7 +5,7 @@ import Table  from 'react-bootstrap/Table'
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 
-import './CustomerCard.css';
+import styles from './style.module.scss';
 
 export function DisplayTaxStatus(props) {
     return(
@@ -13,12 +13,12 @@ export function DisplayTaxStatus(props) {
             <Table size="sm" responsive>
                 <tbody>
                     <tr>
-                        <td>Tax Exempt:</td>
-                        <td>{props.customer.Tax_Exempt ? "Exempt" : "Not Exempt"}</td>
+                        <td className={styles.header_text}>Tax Exempt:</td>
+                        <td className={styles.value_text}>{props.customer.Tax_Exempt ? "Exempt" : "Not Exempt"}</td>
                     </tr>
                     <tr>
-                        <td>Status ID</td>
-                        <td>
+                        <td className={styles.header_text}>Status ID</td>
+                        <td className={styles.value_text}>
                             {
                                 !props.customer.Tax_Exempt ? 
                                     "N/A" : 
@@ -73,8 +73,8 @@ export function EditTaxStatus(props) {
                 <Table size="sm" responsive>
                 <tbody>
                         <tr>
-                            <td>Tax Exempt:</td>
-                            <td>
+                            <td className={styles.header_text}>Tax Exempt:</td>
+                            <td className={styles.value_text}>
                                 <Form.Check
                                     name="exempt_switch"
                                     type="switch"
@@ -86,19 +86,14 @@ export function EditTaxStatus(props) {
                             </td>
                         </tr>
                         <tr>
-                            <td>Status ID</td>
-                            <td>
+                            <td className={styles.header_text}>Status ID</td>
+                            <td className={styles.value_text}>
                             <Form.Control 
                                     name="exempt_number_box"
                                     size="sm" 
                                     type="text" 
                                     defaultValue={props.customer.Tax_Exempt_Number}
                                     onChange={(e) => {setExemptNumber(e.target.value)}}/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
                             </td>
                         </tr>
                     </tbody>
