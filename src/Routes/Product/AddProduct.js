@@ -140,19 +140,34 @@ export default function AddProduct(props) {
                                             <tr>
                                                 <td>Supplier:</td>
                                                 <td>
-                                                    <b>TODO</b>
-                                            </td>
+                                                    <Form.Control
+                                                        name="choose_supplier"
+                                                        as="select"
+                                                        size="sm">
+                                                        {suppliers.map((supplier, index) => <option>{supplier.name}</option>)}
+                                                    </Form.Control>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Tax:</td>
                                                 <td>
-                                                    <b>TODO</b>
+                                                    <Form.Control
+                                                        name="choose_tax"
+                                                        as="select"
+                                                        size="sm">
+                                                        {taxOptions.map((tax, index) => <option>{tax.tax_name}</option>)}
+                                                    </Form.Control>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Category:</td>
                                                 <td>
-                                                    <b>TODO</b>
+                                                    <Form.Control
+                                                        name="choose_category"
+                                                        as="select"
+                                                        size="sm">
+                                                        {categorys.map((category, index) => <option>{category.stock_name}</option>)}
+                                                    </Form.Control>
                                                 </td>
                                             </tr>
                                         </tbody>
