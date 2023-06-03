@@ -5,6 +5,7 @@ import './index.css';
 import Home from './Routes/Home/Home';
 import SearchCustomer from './Routes/Customer/SearchCustomer/SearchCustomer';
 import CustomerCard from './Routes/Customer/DisplayCustomer/CustomerCard';
+import CreateCustomer from './Routes/Customer/Create/CreateCustomer'
 import SearchProduct from './Routes/Product/SearchProduct';
 import AddProduct from './Routes/Product/AddProduct';
 import TransactionHome from './Routes/Transaction/TransactionHome';
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     {
         path: "/customer",
         element: <SearchCustomer/>
+    },
+    {
+        path: "/customer/create",
+        element: <CreateCustomer/>
     },
     {
         path: "/customer/id/:id",

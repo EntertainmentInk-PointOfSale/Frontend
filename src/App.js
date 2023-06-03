@@ -30,7 +30,7 @@ return (
                 </NavDropdown>
                 <NavDropdown title="Customers" id="CustomerDropDown">
                     <NavDropdown.Item href="/customer">Search</NavDropdown.Item>
-                    <NavDropdown.Item>Create</NavDropdown.Item>
+                    <NavDropdown.Item href="/customer/create">Create</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Products" id="ProductsDropDown">
                     <NavDropdown.Item href="/product">Search</NavDropdown.Item>
