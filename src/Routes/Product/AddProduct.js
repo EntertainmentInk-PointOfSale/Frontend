@@ -2,8 +2,79 @@ import Form from 'react-bootstrap/Form'
 import Table from 'react-bootstrap/Table'
 import App from '../../App'
 import { Card, Container, Col, Row } from "react-bootstrap";
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 
 export default function AddProduct(props) {
+    const [taxOptions, setTaxOptions] = useState([])
+    const [suppliers, setSuppliers] = useState([])
+    const [categorys, setCategories] = useState([]) 
+ 
+    useEffect(() => {
+        // Get all tax codes
+        axios(
+            {
+                baseURL: "http://localhost:3001/api",
+                url: "tax/",
+                headers: {
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                },
+                method: 'get'
+            }
+        )
+        .then((response) => {
+            console.log("Tax Options: ",response.data)
+            setTaxOptions(response.data);
+        })
+        .catch((err) => {
+            console.log("Received error")
+            console.log(err)
+        })
+
+        // Get all Product Categories
+        axios(
+            {
+                baseURL: "http://localhost:3001/api",
+                url: "stockcategory/",
+                headers: {
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                },
+                method: 'get'
+            }
+        )
+        .then((response) => {
+            console.log("Categories: ", response.data)
+            setCategories(response.data)
+        })
+        .catch((err) => {
+            console.log("Received error")
+            console.log(err)
+        })
+
+        //Get all Suppliers
+        axios(
+            {
+                baseURL: "http://localhost:3001/api",
+                url: "supplier/",
+                headers: {
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                },
+                method: 'get'
+            }
+        )
+        .then((response) => {
+            console.log("Suppliers: ", response.data)
+            setSuppliers(response.data)
+        })
+        .catch((err) => {
+            console.log("Received error")
+            console.log(err)
+        })
+    },[])
+
     return (
         
         <App title="New Product">
@@ -66,6 +137,24 @@ export default function AddProduct(props) {
                                                         />
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>Supplier:</td>
+                                                <td>
+                                                    <b>TODO</b>
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tax:</td>
+                                                <td>
+                                                    <b>TODO</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Category:</td>
+                                                <td>
+                                                    <b>TODO</b>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </Table>
                                 </Card.Body>
@@ -77,12 +166,7 @@ export default function AddProduct(props) {
                                 <Card.Body>
                                     <Table responsive>
                                         <tbody>
-                                            <tr>
-                                                <td>Supplier:</td>
-                                                <td>
-                                                    <b>TODO</b>
-                                                </td>
-                                            </tr>
+
                                         </tbody>
                                     </Table>
                                 </Card.Body>
@@ -94,12 +178,7 @@ export default function AddProduct(props) {
                                 <Card.Body>
                                     <Table responsive>
                                         <tbody>
-                                            <tr>
-                                                <td>Tax:</td>
-                                                <td>
-                                                    <b>TODO</b>
-                                                </td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </Table>
                                 </Card.Body>
@@ -110,14 +189,7 @@ export default function AddProduct(props) {
                                 <Card.Header as="h5">Stock Category</Card.Header>
                                 <Card.Body>
                                     <Table responsive >
-                                        <tbody>
-                                            <tr>
-                                                <td>Category:</td>
-                                                <td>
-                                                    <b>TODO</b>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        
                                     </Table>
                                 </Card.Body>
                             </Card>
