@@ -1,15 +1,32 @@
 import Form from 'react-bootstrap/Form'
 import Table from 'react-bootstrap/Table'
+import {Button} from 'react-bootstrap'
 import App from '../../App'
 import { Card, Container, Col, Row } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import axios from 'axios';
 
 export default function AddProduct(props) {
+    // Select options
     const [taxOptions, setTaxOptions] = useState([])
     const [suppliers, setSuppliers] = useState([])
     const [categorys, setCategories] = useState([]) 
  
+    // Selected option
+    const [supplier, setSupplier] = useState(0)
+    const [tax, setTax] = useState(0)
+    const [category, setCategory] = useState(0)
+
+    // Written attributes
+    const [productName, setProductName] = useState("")
+    const [lookupCode, setLookupCode] = useState("")
+    const [sellPrice,setSellPrice] = useState("")
+    const [purchasePrice, setPurchasePrice] = useState("")
+    const [stockLevel, setStockLevel] = useState(0)
+
+    const navigate = useNavigate()
+
     useEffect(() => {
         // Get all tax codes
         axios(
@@ -24,7 +41,6 @@ export default function AddProduct(props) {
             }
         )
         .then((response) => {
-            console.log("Tax Options: ",response.data)
             setTaxOptions(response.data);
         })
         .catch((err) => {
@@ -45,7 +61,6 @@ export default function AddProduct(props) {
             }
         )
         .then((response) => {
-            console.log("Categories: ", response.data)
             setCategories(response.data)
         })
         .catch((err) => {
@@ -66,7 +81,6 @@ export default function AddProduct(props) {
             }
         )
         .then((response) => {
-            console.log("Suppliers: ", response.data)
             setSuppliers(response.data)
         })
         .catch((err) => {
@@ -75,11 +89,41 @@ export default function AddProduct(props) {
         })
     },[])
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        axios(
+            {
+                baseURL: "http://localhost:3001/api",
+                url: "product/create",
+                headers: {
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                },
+                method: 'POST',
+                data: {
+                    "product_name": productName,
+                    "lookup_code": lookupCode,
+                    "selling_price": sellPrice,
+                    "purchase_price": purchasePrice,
+                    "stock_level": stockLevel,
+                    "supplier_id": supplier,
+                    "tax_id": tax,
+                    "category_id": category
+                }
+            }
+        )
+        .then((response) => {
+            console.log(`Added! - Product with ID: ${response.data}`)
+            // navigate(`/product/id/${response.data}`)
+        })
+    }
+
     return (
         
         <App title="New Product">
             <Container fluid>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <Row>
                         <Col md={3}>
                             <Card>
@@ -91,9 +135,11 @@ export default function AddProduct(props) {
                                                 <td>Display Name:</td>
                                                 <td>
                                                     <Form.Control
+                                                        required
                                                         name="name_box"
                                                         size="sm"
                                                         type="text"
+                                                        onChange={(e) => {setProductName(e.target.value)}}
                                                         />
                                                 </td>
                                             </tr>
@@ -101,9 +147,11 @@ export default function AddProduct(props) {
                                                 <td>Code:</td>
                                                 <td>
                                                     <Form.Control
+                                                        required
                                                         name="code_box"
                                                         size="sm"
                                                         type="text"
+                                                        onChange={(e) => {setLookupCode(e.target.value)}}
                                                         />
                                                 </td>
                                             </tr>
@@ -111,19 +159,23 @@ export default function AddProduct(props) {
                                                 <td>Selling Price:</td>
                                                 <td>
                                                     <Form.Control
+                                                        required
                                                         name="sell_price_box"
                                                         size="sm"
                                                         type="text"
+                                                        onChange={(e) => {setSellPrice(e.target.value)}}
                                                         />
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Purchase Prie:</td>
+                                                <td>Purchase Price:</td>
                                                 <td>
                                                     <Form.Control
+                                                        required
                                                         name="purchase_price_box"
                                                         size="sm"
                                                         type="text"
+                                                        onChange={(e) => {setPurchasePrice(e.target.value)}}
                                                         />
                                                 </td>
                                             </tr>
@@ -131,9 +183,11 @@ export default function AddProduct(props) {
                                                 <td>Stock Level:</td>
                                                 <td>
                                                     <Form.Control
+                                                        required
                                                         name="stock_level_box"
                                                         size="sm"
                                                         type="text"
+                                                        onChange={(e) => {setStockLevel(e.target.value)}}
                                                         />
                                                 </td>
                                             </tr>
@@ -143,8 +197,9 @@ export default function AddProduct(props) {
                                                     <Form.Control
                                                         name="choose_supplier"
                                                         as="select"
-                                                        size="sm">
-                                                        {suppliers.map((supplier, index) => <option>{supplier.name}</option>)}
+                                                        size="sm"
+                                                        onChange={(e) => {setSupplier(e.target.selectedIndex)}}>
+                                                        {suppliers.map((supplier, index) => <option key={index}>{supplier.name}</option>)}
                                                     </Form.Control>
                                                 </td>
                                             </tr>
@@ -154,8 +209,9 @@ export default function AddProduct(props) {
                                                     <Form.Control
                                                         name="choose_tax"
                                                         as="select"
-                                                        size="sm">
-                                                        {taxOptions.map((tax, index) => <option>{tax.tax_name}</option>)}
+                                                        size="sm"
+                                                        onChange={(e) => {setTax(e.target.selectedIndex)}}>
+                                                        {taxOptions.map((tax, index) => <option key={index}>{tax.tax_name}</option>)}
                                                     </Form.Control>
                                                 </td>
                                             </tr>
@@ -165,46 +221,18 @@ export default function AddProduct(props) {
                                                     <Form.Control
                                                         name="choose_category"
                                                         as="select"
-                                                        size="sm">
-                                                        {categorys.map((category, index) => <option>{category.stock_name}</option>)}
+                                                        size="sm"
+                                                        onChange={(e) => {setCategory(e.target.selectedIndex)}}>
+                                                        {categorys.map((category, index) => <option key={index}>{category.stock_name}</option>)}
                                                     </Form.Control>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td colSpan={2}>
+                                                    <Button type="submit">Submit</Button>
+                                                </td>
+                                            </tr>
                                         </tbody>
-                                    </Table>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col md={2}>
-                            <Card>
-                                <Card.Header as="h5">Supplier</Card.Header>
-                                <Card.Body>
-                                    <Table responsive>
-                                        <tbody>
-
-                                        </tbody>
-                                    </Table>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col md={2}>
-                            <Card>
-                                <Card.Header as="h5">Tax</Card.Header>
-                                <Card.Body>
-                                    <Table responsive>
-                                        <tbody>
-                                            
-                                        </tbody>
-                                    </Table>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col md={2}>
-                            <Card>
-                                <Card.Header as="h5">Stock Category</Card.Header>
-                                <Card.Body>
-                                    <Table responsive >
-                                        
                                     </Table>
                                 </Card.Body>
                             </Card>

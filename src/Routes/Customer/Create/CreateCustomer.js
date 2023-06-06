@@ -17,9 +17,7 @@ export default function CreateCustomer() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        console.log(customerName, customerPhone, customerEmail, customerNote)
-
+        
         axios(
             {
                 baseURL: "http://localhost:3001/api",
