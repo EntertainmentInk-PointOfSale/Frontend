@@ -9,6 +9,7 @@ import CreateCustomer from './Routes/Customer/Create/CreateCustomer'
 import SearchProduct from './Routes/Product/SearchProduct';
 import AddProduct from './Routes/Product/AddProduct';
 import TransactionHome from './Routes/Transaction/TransactionHome';
+import DisplayProduct from './Routes/Product/DisplayProduct'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
     {
         path: "/product/add",
         element: <AddProduct/>
+    },
+    {
+        path: "/product/:id",
+        element: <DisplayProduct/>
     },
     {
         path: '/transaction',

@@ -1,4 +1,5 @@
 import TableUtility from '../../Utility/TableUtility'
+import { Button } from 'react-bootstrap'
 
 const columns = [
     {
@@ -25,6 +26,11 @@ const columns = [
     {
         header: "Tax",
         accessorKey: "tax_applied.tax_name"
+    },
+    {
+        header: "View",
+        id: "view_customer",
+        cell: props => <Button variant="secondary" size="sm" href={`/product/${props.row.original.product_id}`}><b>View</b></Button>
     },
 ]
 
