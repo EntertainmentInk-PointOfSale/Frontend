@@ -5,6 +5,11 @@ import './index.css';
 import Home from './Routes/Home/Home';
 import SearchCustomer from './Routes/Customer/SearchCustomer/SearchCustomer';
 import CustomerCard from './Routes/Customer/DisplayCustomer/CustomerCard';
+import CreateCustomer from './Routes/Customer/Create/CreateCustomer'
+import SearchProduct from './Routes/Product/SearchProduct';
+import AddProduct from './Routes/Product/AddProduct';
+import TransactionHome from './Routes/Transaction/TransactionHome';
+import DisplayProduct from './Routes/Product/DisplayProduct'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,14 +23,32 @@ const router = createBrowserRouter([
         element: <SearchCustomer/>
     },
     {
+        path: "/customer/create",
+        element: <CreateCustomer/>
+    },
+    {
         path: "/customer/id/:id",
         element: <CustomerCard/>
     },
+    {
+        path: "/product",
+        element: <SearchProduct/>
+    },
+    {
+        path: "/product/add",
+        element: <AddProduct/>
+    },
+    {
+        path: "/product/:id",
+        element: <DisplayProduct/>
+    },
+    {
+        path: '/transaction',
+        element: <TransactionHome></TransactionHome>
+    }
 ])
 
 root.render(
-    <React.StrictMode>
-        <RouterProvider router={router}/>
-    </React.StrictMode>
+    <RouterProvider router={router}/>
 );
 

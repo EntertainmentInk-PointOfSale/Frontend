@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table'
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 
-import './CustomerCard.css';
+import styles from './style.module.scss';
 
 export function DisplayPersonalDetail(props) {  
     return (
@@ -14,30 +14,30 @@ export function DisplayPersonalDetail(props) {
             <Table responsive>
                 <tbody>
                     <tr>
-                        <td>Name:</td>
-                        <td>{props.customer.Name}</td>
+                        <td className={styles.header_text}>Name:</td>
+                        <td className={styles.value_text}>{props.customer.Name}</td>
                     </tr>
                     <tr>
-                        <td>ID:</td>
-                        <td>{props.customer.ID}</td>
+                        <td className={styles.header_text}>ID:</td>
+                        <td className={styles.value_text}>{props.customer.ID}</td>
                     </tr>
                     <tr>
-                        <td>E-Mail:</td>
-                        <td>{props.customer.Email}</td>
+                        <td className={styles.header_text}>E-Mail:</td>
+                        <td className={styles.value_text}>{props.customer.Email}</td>
                     </tr>
                     <tr>
-                        <td>Phone:</td>
-                        <td>{props.customer.Phone}</td>
+                        <td className={styles.header_text}>Phone:</td>
+                        <td className={styles.value_text}>{props.customer.Phone}</td>
                     </tr>
                     <tr>
-                        <td>Join Date:</td>
-                        <td>
+                        <td className={styles.header_text}>Join Date:</td>
+                        <td className={styles.value_text}>
                             <Moment date={props.customer.Join_Date}  format="YYYY-MM-DD"></Moment>
                         </td>
                     </tr>
                     <tr>
-                        <td>Status:</td>
-                        <td>{props.customer.Active ? "Active" : "Not Active"}</td>
+                        <td className={styles.header_text}>Status:</td>
+                        <td className={styles.value_text}>{props.customer.Active ? "Active" : "Not Active"}</td>
                     </tr>
                 </tbody>
             </Table>
@@ -104,8 +104,8 @@ export function EditPersonalDetail(props) {
                 <Table responsive>
                     <tbody>
                         <tr>
-                            <td>Name:</td>
-                            <td>
+                            <td className={styles.header_text}>Name:</td>
+                            <td className={styles.value_text}>
                                 <Form.Control 
                                     name="name_box"
                                     size="sm" 
@@ -115,12 +115,12 @@ export function EditPersonalDetail(props) {
                             </td>
                         </tr>
                         <tr>
-                            <td>ID:</td>
-                            <td>{props.customer.ID}</td>
+                            <td className={styles.header_text}>ID:</td>
+                            <td className={styles.value_text}>{props.customer.ID}</td>
                         </tr>
                         <tr>
-                            <td>E-Mail:</td>
-                            <td>
+                            <td className={styles.header_text}>E-Mail:</td>
+                            <td className={styles.value_text}>
                                 <Form.Control 
                                     name="email_box"
                                     size="sm" 
@@ -130,8 +130,8 @@ export function EditPersonalDetail(props) {
                             </td>
                         </tr>
                         <tr>
-                            <td>Phone:</td>
-                            <td>
+                            <td className={styles.header_text}>Phone:</td>
+                            <td className={styles.value_text}>
                                 <Form.Control 
                                     name="phone_box"
                                     size="sm" 
@@ -141,14 +141,14 @@ export function EditPersonalDetail(props) {
                             </td>
                         </tr>
                         <tr>
-                        <td>Join Date:</td>
-                        <td>
+                        <td className={styles.header_text}>Join Date:</td>
+                        <td className={styles.value_text}>
                             <Moment date={props.customer.Join_Date}  format="YYYY-MM-DD"></Moment>
                         </td>
                     </tr>
                         <tr>
-                            <td>Status:</td>
-                            <td>
+                            <td className={styles.header_text}>Status:</td>
+                            <td className={styles.value_text}>
                                 <Form.Check
                                     name="active_switch"
                                     type="switch"

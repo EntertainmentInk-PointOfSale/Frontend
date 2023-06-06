@@ -1,0 +1,5 @@
+.transaction-div {
+    min-height: 400px;
+    background-color: whitesmoke;
+    outline: solid 2px black;
+}
