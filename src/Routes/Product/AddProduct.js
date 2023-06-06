@@ -107,15 +107,14 @@ export default function AddProduct(props) {
                     "selling_price": sellPrice,
                     "purchase_price": purchasePrice,
                     "stock_level": stockLevel,
-                    "supplier_id": supplier,
-                    "tax_id": tax,
-                    "category_id": category
+                    "supplier_id": suppliers[supplier].supplier_id,
+                    "tax_id": taxOptions[tax].tax_code,
+                    "category_id": categorys[category].stock_id
                 }
             }
         )
         .then((response) => {
-            console.log(`Added! - Product with ID: ${response.data}`)
-            // navigate(`/product/id/${response.data}`)
+            navigate(`/product/${response.data}`)
         })
     }
 
