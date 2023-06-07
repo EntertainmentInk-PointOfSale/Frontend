@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import {flexRender, 
     getCoreRowModel,
@@ -23,7 +23,8 @@ const columns = [
                             indeterminate: props.row.getIsSomeSelected(),
                             onChange: props.row.getToggleSelectedHandler(),
                         }}
-                        /> 
+                        />,
+        size: 50
         
     },
     {
@@ -37,6 +38,7 @@ const columns = [
     {
         header: "Tax",
         accessorKey: "tax_applied.tax_name",
+        size: 80
     },
     {
         header: "Price",
@@ -62,7 +64,7 @@ export default function TransactionTable({data, rowSelection, setRowSelection}) 
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr key={headerGroup.id}>
                     {headerGroup.headers.map(header => (
-                        <th key={header.id} style={{textAlign: 'center'}}>
+                        <th key={header.id} style={{textAlign: 'center', width: header.getSize() !== 150 ? header.getSize() : undefined,}}>
                             {
                                 flexRender(header.column.columnDef.header,header.getContext())
                             }
@@ -102,7 +104,7 @@ function IndeterminateCheckbox({
       if (typeof indeterminate === 'boolean') {
         ref.current.indeterminate = !rest.checked && indeterminate
       }
-    }, [ref, indeterminate])
+    }, [ref, indeterminate, rest.checked])
   
     return (
       <input

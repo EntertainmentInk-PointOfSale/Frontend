@@ -11,7 +11,6 @@ import {
 } from 'react-bootstrap'
 import Col from 'react-bootstrap/Col'
 import TransactionTable from './TransactionTable';
-import { useLocalStorage } from '../../Utility/utility.storage';
 import { SaleItem } from '../../Data/SaleItem'
 
 export default function TransactionHome(props) {
@@ -81,45 +80,46 @@ export default function TransactionHome(props) {
 
     return(
         <App title="Transaction">
-            <Container>
-                    <Row className='mb-2'>
-                        <Col>
-                            <div className='transaction-div'>
-                                <TransactionTable data={products} rowSelection={rowSelection} setRowSelection={setRowSelection}/>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Form onSubmit={handleSearch}>
+            <Form onSubmit={handleSearch}>
+                <Container>
                         <Row className='mb-2'>
-                                <Col md="10">
-                                    <Form.Control 
-                                    type="text"
-                                    onChange={(e) => setSearchQuery(e.target.value)}/>
-                                </Col>
-                                <Col md="2">
-                                    <Button variant="primary" type="submit" style={{width: '100%'}}>
-                                        Submit
-                                    </Button>
-                                </Col>
+                            <Col>
+                                <div className='transaction-div'>
+                                    <TransactionTable data={products} rowSelection={rowSelection} setRowSelection={setRowSelection}/>
+                                </div>
+                            </Col>
                         </Row>
-                    </Form>
-                    <Row>
-                        <Col>
-                            <Row>
-                                Subtotal: ${subtotal}
-                            </Row>
-                            <Row>
-                                Tax Amount: ${taxTotal}
-                            </Row>
-                            <Row>
-                                Total Due: ${total}
-                            </Row>
-                        </Col>
-                        <Col>
-                            <Button variant="secondary" onClick={() => removeSelected()}>Remove Selected</Button>
-                        </Col>
-                    </Row>
-            </Container>
+                        <Row className='mb-2'>
+                            <Col md="10">
+                                <Form.Control 
+                                type="text"
+                                id="searchbar"
+                                onChange={(e) => setSearchQuery(e.target.value)}/>
+                            </Col>
+                            <Col md="2">
+                                <Button variant="primary" type="submit" style={{width: '100%'}}>
+                                    Submit
+                                </Button>
+                            </Col>
+                        </Row>
+                        <Row className='mb-2'>
+                            <Col>
+                                <Row>
+                                    Subtotal: ${subtotal}
+                                </Row>
+                                <Row>
+                                    Tax Amount: ${taxTotal}
+                                </Row>
+                                <Row>
+                                    Total Due: ${total}
+                                </Row>
+                            </Col>
+                            <Col>
+                                <Button variant="secondary" onClick={() => removeSelected()}>Remove Selected</Button>
+                            </Col>
+                        </Row>
+                </Container>
+            </Form>
         </App>
     )
 }
