@@ -5,8 +5,6 @@ import Table from 'react-bootstrap/Table'
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 
-import styles from './style.module.scss';
-
 export function DisplayNotes(props) {
     return (
         <>

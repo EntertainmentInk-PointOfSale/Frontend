@@ -15,8 +15,6 @@ import {DisplayPersonalDetail, EditPersonalDetail} from './util/PersonalDetails'
 import {DisplayNotes, EditNotes} from './util/Notes'
 import {DisplayTaxStatus, EditTaxStatus} from './util/TaxStatus'
 
-import styles from './util/style.module.scss';
-
 export default function DisplayCustomer(props) {
     //Customer data
     const {id} = useParams();
