@@ -1,9 +1,8 @@
 import {React, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import {Button} from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
-
-import App from '../../../App';
+import App from '../../App';
 import axios from 'axios';
 
 

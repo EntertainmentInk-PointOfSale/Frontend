@@ -1,12 +1,12 @@
 import {React,useState,useEffect,} from 'react';
 import axios from 'axios';
-import App from '../../../App';
+import App from '../../App';
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import Moment from 'react-moment';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import CustomerTable from './CustomerTable'
+import CustomerTable from './util/CustomerTable'
 
 //Helper
 function formatPhoneNumber(phoneNumberString) {
