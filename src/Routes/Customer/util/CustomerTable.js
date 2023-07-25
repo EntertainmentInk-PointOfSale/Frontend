@@ -24,7 +24,7 @@ export default function CustomerTable({data, columns, initialSorting}) {
         console.log(`new data: ${data}`)
     },[data])
     return (
-        <Table size={"sm"} bordered hover responsive>
+        <Table size={"sm"} style={{tableLayout: 'fixed'}} bordered hover responsive>
             <thead>
             {table.getHeaderGroups().map(headerGroup => (
                 <tr key={headerGroup.id}>

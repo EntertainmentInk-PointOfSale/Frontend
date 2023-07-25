@@ -1,15 +1,22 @@
 import './TransactionHome.css'
 
+// Page 
 import {useEffect, useState} from "react";
 import axios from 'axios';
+
+// Components
 import App from "../../App"
 import {
     Container,
     Row,
+    Col,
     Form,
-    Button
+    Button,
+    Card,
+    Table
 } from 'react-bootstrap'
-import Col from 'react-bootstrap/Col'
+
+// Custom 
 import TransactionTable from './TransactionTable';
 import { SaleItem } from '../../Data/SaleItem'
 
@@ -72,9 +79,11 @@ export default function TransactionHome(props) {
 
     const removeSelected = () => {
         const tempProducts = products;
+
         for(const index in rowSelection) {
             tempProducts.splice(index,1);
         }
+
         setProducts(tempProducts);
     }
 
@@ -98,24 +107,61 @@ export default function TransactionHome(props) {
                             </Col>
                             <Col md="2">
                                 <Button variant="primary" type="submit" style={{width: '100%'}}>
-                                    Submit
+                                    Enter
                                 </Button>
                             </Col>
                         </Row>
-                        <Row className='mb-2'>
-                            <Col>
-                                <Row>
-                                    Subtotal: ${subtotal}
-                                </Row>
-                                <Row>
-                                    Tax Amount: ${taxTotal}
-                                </Row>
-                                <Row>
-                                    Total Due: ${total}
-                                </Row>
+                        <Row className='mb-2' style={{display: 'flex', justifyContent: 'space-between'}}>
+                            <Col md="2">
+                                <Card>
+                                    <Card.Header><b>Totals</b></Card.Header>
+                                    <Card.Body>
+                                        <Table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Subtotal:</td>
+                                                    <td>${subtotal}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tax Amount:</td>
+                                                    <td>${taxTotal}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total Due:</td>
+                                                    <td>${total}</td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
+                                    </Card.Body>
+                                </Card>
                             </Col>
-                            <Col>
-                                <Button variant="secondary" onClick={() => removeSelected()}>Remove Selected</Button>
+                            <Col md="2">
+                                <Card>
+                                    <Card.Header><b>Customer</b></Card.Header>
+                                    <Card.Body>
+                                        <div style={{display: 'flex', justifyContent: 'right', flexDirection: 'column', gap: '5px'}}>
+                                            <div>
+                                                <Button variant="secondary" style={{width: '100%'}} onClick={() => console.log("View Sales")}>View Sales</Button>
+                                            </div>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col md="2" >
+                                <div style={{display: 'flex', justifyContent: 'right', flexDirection: 'column', gap: '5px'}}>
+                                    <div>
+                                        <Button variant="secondary" style={{width: '100%'}} onClick={() => removeSelected()}>Remove Selected</Button>
+                                    </div>
+                                    <div>
+                                        <Button variant="secondary" style={{width: '100%'}} onClick={() => console.log("Hold")}>Hold Transaction</Button>
+                                    </div>
+                                    <div>
+                                        <Button variant="secondary" style={{width: '100%'}} onClick={() => console.log("Cancel")}>Cancel Transaction</Button>
+                                    </div>
+                                    <div>
+                                        <Button variant="secondary" style={{width: '100%'}} onClick={() => console.log("Checkout")}>Checkout</Button>
+                                    </div>
+                                </div>
                             </Col>
                         </Row>
                 </Container>

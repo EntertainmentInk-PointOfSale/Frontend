@@ -21,7 +21,7 @@ export default function TableUtility({data, columns, initialSorting}) {
         onSortingChange: setSorting,
     })
     return (
-        <Table size={"sm"} bordered hover responsive>
+        <Table size={"sm"} bordered hover responsive style={{tableLayout: 'fixed'}}>
             <thead>
             {table.getHeaderGroups().map(headerGroup => (
                 <tr key={headerGroup.id}>

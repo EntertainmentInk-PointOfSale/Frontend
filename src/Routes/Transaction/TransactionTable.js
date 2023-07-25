@@ -24,7 +24,7 @@ const columns = [
                             onChange: props.row.getToggleSelectedHandler(),
                         }}
                         />,
-        size: 50
+        size: 30
         
     },
     {
@@ -59,12 +59,12 @@ export default function TransactionTable({data, rowSelection, setRowSelection}) 
     })
 
     return (
-        <Table size={"sm"} hover responsive>
+        <Table size={"sm"} style={{borderCollapse: 'collapse'}} hover striped>
             <thead>
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr key={headerGroup.id}>
                     {headerGroup.headers.map(header => (
-                        <th key={header.id} style={{textAlign: 'center', width: header.getSize() !== 150 ? header.getSize() : undefined,}}>
+                        <th key={header.id} style={{borderRight: 'solid 1px #d3d3d3', borderBottom: 'solid 1px #d3d3d3', textAlign: 'center', width: header.getSize() !== 150 ? header.getSize() : undefined,}}>
                             {
                                 flexRender(header.column.columnDef.header,header.getContext())
                             }
