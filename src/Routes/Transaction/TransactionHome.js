@@ -72,9 +72,12 @@ export default function TransactionHome(props) {
             tax_temp += parseFloat(item.selling_price) * parseFloat(item.tax_applied.amount)
         }
 
+        sub_temp = Math.round(sub_temp * 100) / 100;
+        tax_temp = Math.round(tax_temp * 100) / 100
+
         setSubtotal(sub_temp);
         setTaxTotal(tax_temp);
-        setTotal(sub_temp + tax_temp);
+        setTotal(Math.round(sub_temp + tax_temp * 100) / 100);
     }, [products])
 
     const removeSelected = () => {
@@ -113,7 +116,7 @@ export default function TransactionHome(props) {
                         </Row>
                         <Row className='mb-2' style={{display: 'flex', justifyContent: 'space-between'}}>
                             <Col md="2">
-                                <Card>
+                                <Card style={{minWidth: '200px'}}>
                                     <Card.Header><b>Totals</b></Card.Header>
                                     <Card.Body>
                                         <Table>
@@ -136,7 +139,7 @@ export default function TransactionHome(props) {
                                 </Card>
                             </Col>
                             <Col md="2">
-                                <Card>
+                                <Card style={{minWidth: '200px'}}>
                                     <Card.Header><b>Customer</b></Card.Header>
                                     <Card.Body>
                                         <div style={{display: 'flex', justifyContent: 'right', flexDirection: 'column', gap: '5px'}}>

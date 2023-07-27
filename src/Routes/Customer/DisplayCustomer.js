@@ -46,7 +46,7 @@ export default function DisplayCustomer(props) {
         .catch((err) => {
             console.log("ERROR: ",err)
         })
-    }, []);
+    }, [id]);
 
     return (
         <App title={`Customer ${id}`} className='customer-cards'>
