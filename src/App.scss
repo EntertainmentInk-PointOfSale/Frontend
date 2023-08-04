@@ -2,7 +2,7 @@
 @import './Styles/mixins';
 
 .transaction-table-container {
-    outline: solid 2px lightgrey;
+    outline: solid 2px $contrast-color;
     border-radius: 5px;
     
     Table { 
