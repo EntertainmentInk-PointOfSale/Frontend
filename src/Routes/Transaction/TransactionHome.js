@@ -1,5 +1,3 @@
-import './TransactionHome.css'
-
 // Page 
 import {useEffect, useState} from "react";
 import axios from 'axios';
@@ -19,6 +17,10 @@ import {
 // Custom 
 import TransactionTable from './TransactionTable';
 import { SaleItem } from '../../Data/SaleItem'
+import CustomerModal from '../Customer/CustomerModal'
+
+const mock_customer = {lookup_code: '123456789', product_name: 'Other Product', selling_price: '11.99', tax_applied: {tax_code:2,tax_name:"HST","amount":0.13}}
+
 
 export default function TransactionHome(props) {
 
@@ -31,6 +33,8 @@ export default function TransactionHome(props) {
     const [taxTotal, setTaxTotal] = useState(0.00);
     const [total,    setTotal]    = useState(0.00);
 
+    // Track modal state
+    const [showCustomerModal, setShowCustomerModal] = useState(false); 
 
     //Search for product code and add to transaction if found
     const handleSearch = (event) => {
@@ -80,6 +84,16 @@ export default function TransactionHome(props) {
         setTotal(Math.round(sub_temp + tax_temp * 100) / 100);
     }, [products])
 
+    useEffect(() => {
+        setProducts([])
+
+        for (var i = 0; i < 40; i++) {
+            const item = new SaleItem(mock_customer)
+            setProducts(previousInputs => [...previousInputs, item])
+        }
+
+    }, [])
+
     const removeSelected = () => {
         const tempProducts = products;
 
@@ -92,16 +106,18 @@ export default function TransactionHome(props) {
 
     return(
         <App title="Transaction">
+            <CustomerModal show={showCustomerModal} setShow={setShowCustomerModal} />
+
             <Form onSubmit={handleSearch}>
                 <Container>
-                        <Row className='mb-2'>
+                        <Row className='mb-3'>
                             <Col>
-                                <div className='transaction-div'>
+                                <div className='transaction-table-container'>
                                     <TransactionTable data={products} rowSelection={rowSelection} setRowSelection={setRowSelection}/>
                                 </div>
                             </Col>
                         </Row>
-                        <Row className='mb-2'>
+                        <Row className='mb-4'>
                             <Col md="10">
                                 <Form.Control 
                                 type="text"
@@ -142,7 +158,10 @@ export default function TransactionHome(props) {
                                 <Card style={{minWidth: '200px'}}>
                                     <Card.Header><b>Customer</b></Card.Header>
                                     <Card.Body>
-                                        <div style={{display: 'flex', justifyContent: 'right', flexDirection: 'column', gap: '5px'}}>
+                                        <div className='transaction-button-container'>
+                                            <div>
+                                                <Button variant="secondary" style={{width: '100%'}} onClick={() => setShowCustomerModal(true)}>Select</Button>
+                                            </div>
                                             <div>
                                                 <Button variant="secondary" style={{width: '100%'}} onClick={() => console.log("View Sales")}>View Sales</Button>
                                             </div>
@@ -151,7 +170,22 @@ export default function TransactionHome(props) {
                                 </Card>
                             </Col>
                             <Col md="2" >
-                                <div style={{display: 'flex', justifyContent: 'right', flexDirection: 'column', gap: '5px'}}>
+                                <Card style={{minWidth: '200px'}}>
+                                    <Card.Header><b>Product</b></Card.Header>
+                                    <Card.Body>
+                                        <div className='transaction-button-container'>
+                                            <div>
+                                                <Button variant="secondary" style={{width: '100%'}} onClick={() => console.log("Search")}>Search Products</Button>
+                                            </div>
+                                            <div>
+                                                <Button variant="secondary" style={{width: '100%'}} onClick={() => console.log("New")}>New Product</Button>
+                                            </div>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col md="2" >
+                                <div className='transaction-button-container'>
                                     <div>
                                         <Button variant="secondary" style={{width: '100%'}} onClick={() => removeSelected()}>Remove Selected</Button>
                                     </div>

@@ -25,7 +25,6 @@ const columns = [
                         }}
                         />,
         size: 30
-        
     },
     {
         header: "Code",
@@ -64,7 +63,7 @@ export default function TransactionTable({data, rowSelection, setRowSelection}) 
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr key={headerGroup.id}>
                     {headerGroup.headers.map(header => (
-                        <th key={header.id} style={{borderRight: 'solid 1px #d3d3d3', borderBottom: 'solid 1px #d3d3d3', textAlign: 'center', width: header.getSize() !== 150 ? header.getSize() : undefined,}}>
+                        <th key={header.id} style={{borderRight: 'solid 1px #d3d3d3', borderBottom: 'solid 1px #d3d3d3', textAlign: 'center', width: header.getSize(),}}>
                             {
                                 flexRender(header.column.columnDef.header,header.getContext())
                             }
@@ -77,11 +76,11 @@ export default function TransactionTable({data, rowSelection, setRowSelection}) 
             <tbody>
                 {
                     table.getRowModel().rows.map(row => (
-                        <tr key={row.id} style={{textAlign: 'center', margin: 'auto'}}>
+                        <tr key={row.id} style={{textAlign: 'center'}}>
                             {
                                 row.getAllCells().map(cell => (
-                                    <td key={cell.id}>
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    <td key={cell.id} style={{width: cell.column.getSize()}}>
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>
                                 ))
                             }

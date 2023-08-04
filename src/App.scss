@@ -1,2 +1,38 @@
 @import './Styles/variables';
 @import './Styles/mixins';
+
+.transaction-table-container {
+    outline: solid 2px lightgrey;
+    border-radius: 5px;
+    
+    Table { 
+
+        background-color: $contrast-color;
+
+        tbody {
+            display: block;
+            max-height: 380px;
+            overflow-y: scroll;
+
+            tr {
+                margin: 0;
+                width: 100%;
+                background-color: $background-color;
+            }
+        }
+    }
+
+    thead, tbody tr {
+        display: table;
+        width: calc(100% - 17px);
+        table-layout: fixed;
+        background-color: $background-color;
+    }
+}
+
+.transaction-button-container {
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+    gap: 5px;
+}
