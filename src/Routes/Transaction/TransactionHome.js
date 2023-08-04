@@ -19,7 +19,7 @@ import TransactionTable from './TransactionTable';
 import { SaleItem } from '../../Data/SaleItem'
 import CustomerModal from '../Customer/CustomerModal'
 
-const mock_customer = {lookup_code: '123456789', product_name: 'Other Product', selling_price: '11.99', tax_applied: {tax_code:2,tax_name:"HST","amount":0.13}}
+const mock_item = {lookup_code: '123456789', product_name: 'Other Product', selling_price: '11.99', tax_applied: {tax_code:2,tax_name:"HST","amount":0.13}}
 
 
 export default function TransactionHome(props) {
@@ -88,7 +88,7 @@ export default function TransactionHome(props) {
         setProducts([])
 
         for (var i = 0; i < 15; i++) {
-            const item = new SaleItem(mock_customer)
+            const item = new SaleItem(mock_item)
             setProducts(previousInputs => [...previousInputs, item])
         }
 
