@@ -19,16 +19,19 @@ import TransactionTable from './TransactionTable';
 import { SaleItem } from '../../Data/SaleItem'
 import CustomerModal from '../Customer/CustomerModal'
 
-const mock_item = {lookup_code: '123456789', product_name: 'Other Product', selling_price: '11.99', tax_applied: {tax_code:2,tax_name:"HST","amount":0.13}}
+const mock_item = {lookup_code: '123456789', product_name: 'Other Product Product ', selling_price: '11.99', tax_applied: {tax_code:2,tax_name:"HST","amount":0.13}}
 
 
 export default function TransactionHome(props) {
 
-    const [searchQuery, setSearchQuery] = useState();
+    const [searchQuery, setSearchQuery] = useState("");
     const [products, setProducts] = useState([]);
 
     const [rowSelection, setRowSelection] = useState({});
 
+    const [scrollTo, setScrollTo] = useState(0);
+
+    // Dollar amounts
     const [subtotal, setSubtotal] = useState(0.00);
     const [taxTotal, setTaxTotal] = useState(0.00);
     const [total,    setTotal]    = useState(0.00);
@@ -36,7 +39,7 @@ export default function TransactionHome(props) {
     // Track modal state
     const [showCustomerModal, setShowCustomerModal] = useState(false); 
 
-    //Search for product code and add to transaction if found
+    //Utility
     const handleSearch = (event) => {
         event.preventDefault();
 
@@ -63,10 +66,27 @@ export default function TransactionHome(props) {
             const item = new SaleItem(response.data)
             setProducts([...products, item])
         })
-
+        .finally(() => {
+            setScrollTo(products.length-1)
+        })
     }
 
-    //Set sale price when products changes
+    const removeSelected = () => {
+        const keys = Object.keys(rowSelection).map((x) => parseInt(x)).reverse()
+
+        if (keys === []) return;
+
+        let tempProducts = [...products];
+
+        for(var i = 0; i < keys.length; i++) {
+            tempProducts.splice(keys[i],1);
+        }
+
+        setRowSelection([])
+        setProducts(tempProducts);
+    }
+
+    // Manage state
     useEffect(() => {
         var sub_temp = 0.00;
         var tax_temp = 0.00;
@@ -84,6 +104,7 @@ export default function TransactionHome(props) {
         setTotal(Math.round((sub_temp + tax_temp) * 100) / 100);
     }, [products])
 
+    // Load sample data
     useEffect(() => {
         setProducts([])
 
@@ -94,16 +115,6 @@ export default function TransactionHome(props) {
 
     }, [])
 
-    const removeSelected = () => {
-        const tempProducts = products;
-
-        for(const index in rowSelection) {
-            tempProducts.splice(index,1);
-        }
-
-        setProducts(tempProducts);
-    }
-
     return(
         <App title="Transaction">
             <CustomerModal show={showCustomerModal} setShow={setShowCustomerModal} />
@@ -113,7 +124,7 @@ export default function TransactionHome(props) {
                         <Row className='mb-3'>
                             <Col>
                                 <div className='transaction-table-container'>
-                                    <TransactionTable data={products} rowSelection={rowSelection} setRowSelection={setRowSelection}/>
+                                    <TransactionTable data={products} rowSelection={rowSelection} setRowSelection={setRowSelection} scrollTo={scrollTo}/>
                                 </div>
                             </Col>
                         </Row>

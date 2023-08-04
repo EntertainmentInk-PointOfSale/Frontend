@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import {flexRender, 
     getCoreRowModel,
@@ -24,11 +24,12 @@ const columns = [
                             onChange: props.row.getToggleSelectedHandler(),
                         }}
                         />,
-        size: 20
+        size: 10
     },
     {
         header: "Code",
         accessorKey: "lookup_code",
+        size: 60
     },
     {
         header: "Name",
@@ -46,7 +47,16 @@ const columns = [
     }
 ]
 
-export default function TransactionTable({data, rowSelection, setRowSelection}) {
+export default function TransactionTable({data, rowSelection, setRowSelection, scrollTo}) {
+
+    useEffect(() => {
+        let children = document.getElementById('transaction-body-div').getElementsByTagName("tr");
+
+        if(children.length > 0) {
+            children[children.length - 1].scrollIntoView();
+        }   
+    }, [scrollTo])
+
     const table = useReactTable({
         data,
         columns,
@@ -74,7 +84,7 @@ export default function TransactionTable({data, rowSelection, setRowSelection}) 
                 ))}
             </thead>
 
-            <tbody>
+            <tbody id='transaction-body-div'>
                 {
                     table.getRowModel().rows.map(row => (
                         <tr key={row.id} style={{textAlign: 'center'}}>
