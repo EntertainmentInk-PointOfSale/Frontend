@@ -24,7 +24,7 @@ const columns = [
                             onChange: props.row.getToggleSelectedHandler(),
                         }}
                         />,
-        size: 30
+        size: 20
     },
     {
         header: "Code",
@@ -37,11 +37,12 @@ const columns = [
     {
         header: "Tax",
         accessorKey: "tax_applied.tax_name",
-        size: 80
+        size: 30
     },
     {
         header: "Price",
         accessorKey: "selling_price",
+        size: 60
     }
 ]
 

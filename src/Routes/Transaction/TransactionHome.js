@@ -81,13 +81,13 @@ export default function TransactionHome(props) {
 
         setSubtotal(sub_temp);
         setTaxTotal(tax_temp);
-        setTotal(Math.round(sub_temp + tax_temp * 100) / 100);
+        setTotal(Math.round((sub_temp + tax_temp) * 100) / 100);
     }, [products])
 
     useEffect(() => {
         setProducts([])
 
-        for (var i = 0; i < 40; i++) {
+        for (var i = 0; i < 15; i++) {
             const item = new SaleItem(mock_customer)
             setProducts(previousInputs => [...previousInputs, item])
         }

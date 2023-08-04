@@ -2,7 +2,7 @@
 @import './Styles/mixins';
 
 .transaction-table-container {
-    outline: solid 2px $contrast-color;
+    outline: solid 5px $contrast-color;
     border-radius: 5px;
     
     Table { 
@@ -10,8 +10,9 @@
         background-color: $contrast-color;
 
         tbody {
+            background-color: $contrast-color;
             display: block;
-            max-height: 380px;
+            height: 380px;
             overflow-y: scroll;
 
             tr {
@@ -20,6 +21,10 @@
                 background-color: $background-color;
             }
         }
+    }
+
+    thead {
+        border-radius: 5px;
     }
 
     thead, tbody tr {
