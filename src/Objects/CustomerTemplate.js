@@ -1,9 +1,9 @@
 export function CustomerTemplate() {
-    this.ID = 0,
-    this.Name = "",
-    this.Phone = "",
-    this.Email = "",
-    this.Join_Date = "",
-    this.Tax_Exempt = false,
-    this.Note = ""
+    this.id = 0,
+    this.name = "",
+    this.phone = "",
+    this.email = "",
+    this.join_date = "",
+    this.tax_exempt = false,
+    this.note = ""
 }

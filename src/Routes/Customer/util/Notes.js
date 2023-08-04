@@ -9,7 +9,7 @@ export function DisplayNotes(props) {
     return (
         <>
             <p className="big-text">
-                {props.customer.Note}
+                {props.customer.note}
             </p>
             <div className="col text-center">
                 <Button type="button" variant="outline-primary" onClick={() => props.handleClickNote()}>Edit Notes</Button>
@@ -19,21 +19,21 @@ export function DisplayNotes(props) {
 }
 
 export function EditNotes(props) {
-    const [Note,setNote] = useState(props.customer.Note);
+    const [note,setNote] = useState(props.customer.note);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         axios(
             {
                 baseURL: "http://localhost:3001/api",
-                url: `customer/update_personal/${props.customer.ID}`,
+                url: `customer/update_personal/${props.customer.id}`,
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
                     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                 },
                 method: 'put',
                 data: {
-                    "Note":Note
+                    "note": note
                 }
             }
         )
@@ -59,7 +59,7 @@ export function EditNotes(props) {
                                 rows="5"
                                 cols="50"
                                 name="enter_note"
-                                defaultValue={props.customer.Note}
+                                defaultValue={props.customer.note}
                                 onChange={(e) => setNote(e.target.value)}
                             />
                         </td>

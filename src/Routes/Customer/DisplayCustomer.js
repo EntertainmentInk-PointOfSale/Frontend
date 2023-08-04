@@ -41,6 +41,7 @@ export default function DisplayCustomer(props) {
             }
         )
         .then((response) => {
+            console.log(response.data)
             setCustomer(response.data);
         })
         .catch((err) => {

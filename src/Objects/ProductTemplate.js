@@ -4,7 +4,7 @@ import TaxTemplate from "./TaxTemplate";
 
 export default function ProductTempate() {
     return {
-        product_id: 0,
+        id: 0,
         lookup_code: "",
         product_name: "",
         selling_price: 0,
