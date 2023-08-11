@@ -16,9 +16,9 @@ import {
 
 // Custom 
 import TransactionTable from './TransactionTable';
-import { SaleItem } from '../../Data/SaleItem'
+import { SaleItem } from '../../Objects/SaleItem'
 import CustomerModal from '../Customer/CustomerModal'
-import { CustomerTemplate } from "../../Objects/CustomerTemplate";
+import Customer from "../../Objects/Customer";
 
 const mock_item = {lookup_code: '123456789', product_name: 'Other Product Product ', selling_price: '11.99', tax_applied: {tax_code:2,tax_name:"HST","amount":0.13}}
 
@@ -27,7 +27,7 @@ export default function TransactionHome(props) {
 
     // Transaction states
     const [products, setProducts] = useState([]);
-    const [customer, setCustomer] = useState(new CustomerTemplate())
+    const [customer, setCustomer] = useState(Customer.Blank())
 
     const [subtotal, setSubtotal] = useState(0.00);
     const [taxTotal, setTaxTotal] = useState(0.00);
@@ -101,7 +101,7 @@ export default function TransactionHome(props) {
             }
         )
         .then((response) => {
-            setCustomer(response.data[0]);
+            setCustomer(Customer.Load(response.data[0]));
         })
     }
 
