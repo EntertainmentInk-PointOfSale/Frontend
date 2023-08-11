@@ -41,9 +41,12 @@ export function DisplayPersonalDetail(props) {
                     </tr>
                 </tbody>
             </Table>
-            <div className="d-grid gap-2">
-                <Button type="button" variant="outline-primary" size="lg" onClick={() => props.handlePersonalClick()}>Edit Details</Button>
-            </div> 
+            {!props.customer.isStoreUser &&
+                <div className="d-grid gap-2">
+                    <Button type="button" variant="outline-primary" size="lg" onClick={() => props.handlePersonalClick()}>Edit Details</Button>
+                </div> 
+            }
+
         </>
     ) 
 }

@@ -11,9 +11,11 @@ export function DisplayNotes(props) {
             <p className="big-text">
                 {props.customer.note}
             </p>
-            <div className="col text-center">
-                <Button type="button" variant="outline-primary" onClick={() => props.handleClickNote()}>Edit Notes</Button>
-            </div>
+            {!props.customer.isStoreUser && 
+                <div className="col text-center">
+                    <Button type="button" variant="outline-primary" onClick={() => props.handleClickNote()}>Edit Notes</Button>
+                </div>
+            }
         </>
     )
 }

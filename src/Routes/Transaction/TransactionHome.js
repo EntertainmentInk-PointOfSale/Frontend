@@ -26,17 +26,18 @@ export default function TransactionHome(props) {
 
     const [searchQuery, setSearchQuery] = useState("");
     const [products, setProducts] = useState([]);
-
-    const [rowSelection, setRowSelection] = useState({});
-
-    const [scrollTo, setScrollTo] = useState(0);
+    const [customer, setCustomer] = useState({})
 
     // Dollar amounts
     const [subtotal, setSubtotal] = useState(0.00);
     const [taxTotal, setTaxTotal] = useState(0.00);
     const [total,    setTotal]    = useState(0.00);
 
-    // Track modal state
+    //  Table state tracking
+    const [rowSelection, setRowSelection] = useState({});
+    const [scrollTo, setScrollTo] = useState(0);
+
+    // Modal state
     const [showCustomerModal, setShowCustomerModal] = useState(false); 
 
     //Utility
@@ -86,7 +87,7 @@ export default function TransactionHome(props) {
         setProducts(tempProducts);
     }
 
-    // Manage state
+    // Update displayed price on products list change
     useEffect(() => {
         var sub_temp = 0.00;
         var tax_temp = 0.00;
@@ -104,9 +105,11 @@ export default function TransactionHome(props) {
         setTotal(Math.round((sub_temp + tax_temp) * 100) / 100);
     }, [products])
 
-    // Load sample data
     useEffect(() => {
+        // Reset attributes
         setProducts([])
+        setCustomer({})
+
 
         for (var i = 0; i < 15; i++) {
             const item = new SaleItem(mock_item)

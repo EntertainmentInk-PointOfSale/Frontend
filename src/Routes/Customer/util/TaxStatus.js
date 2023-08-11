@@ -30,9 +30,12 @@ export function DisplayTaxStatus(props) {
                     </tr>
                 </tbody>
             </Table>
-            <div className="col text-center">
-                <Button type="button" variant="outline-primary" onClick={() => props.handleClickTax()}>Edit Status</Button>
-            </div>
+            {!props.customer.isStoreUser && 
+                <div className="col text-center">
+                    <Button type="button" variant="outline-primary" onClick={() => props.handleClickTax()}>Edit Status</Button>
+                </div>
+            }
+            
         </>
     )
 }

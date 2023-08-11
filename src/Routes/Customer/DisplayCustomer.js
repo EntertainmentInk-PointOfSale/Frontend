@@ -22,7 +22,7 @@ export default function DisplayCustomer(props) {
     
     //Edit States
     const [editPersonal, setEditPersonal] = useState(false);
-    const handleSwitchPersonal = () => {setEditPersonal(!editPersonal);}
+    const handleSwitchPersonal = () => { if(!customer.isStoreUser) setEditPersonal(!editPersonal);}
     const[editNote, setEditNote] = useState(false);
     const handleSwitchNote = () => {setEditNote(!editNote)}
     const[editTax, setEditTax] = useState(false);

@@ -20,10 +20,6 @@ export default function CustomerTable({data, columns, initialSorting}) {
         },
         onSortingChange: setSorting,
     })
-    useEffect(() => {
-        console.log(`new data`)
-        console.log(data)
-    },[data])
     return (
         <Table size={"sm"} style={{tableLayout: 'fixed'}} bordered hover responsive>
             <thead>
