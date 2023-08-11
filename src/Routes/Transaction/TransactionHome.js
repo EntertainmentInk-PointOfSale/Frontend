@@ -18,26 +18,27 @@ import {
 import TransactionTable from './TransactionTable';
 import { SaleItem } from '../../Data/SaleItem'
 import CustomerModal from '../Customer/CustomerModal'
+import { CustomerTemplate } from "../../Objects/CustomerTemplate";
 
 const mock_item = {lookup_code: '123456789', product_name: 'Other Product Product ', selling_price: '11.99', tax_applied: {tax_code:2,tax_name:"HST","amount":0.13}}
 
 
 export default function TransactionHome(props) {
 
-    const [searchQuery, setSearchQuery] = useState("");
+    // Transaction states
     const [products, setProducts] = useState([]);
-    const [customer, setCustomer] = useState({})
+    const [customer, setCustomer] = useState(new CustomerTemplate())
 
-    // Dollar amounts
     const [subtotal, setSubtotal] = useState(0.00);
     const [taxTotal, setTaxTotal] = useState(0.00);
     const [total,    setTotal]    = useState(0.00);
 
-    //  Table state tracking
+    //  Search State
+    const [searchQuery,  setSearchQuery]  = useState("");
     const [rowSelection, setRowSelection] = useState({});
-    const [scrollTo, setScrollTo] = useState(0);
+    const [scrollTo,     setScrollTo]     = useState(0);
 
-    // Modal state
+    // Customer Utils
     const [showCustomerModal, setShowCustomerModal] = useState(false); 
 
     //Utility
@@ -87,6 +88,23 @@ export default function TransactionHome(props) {
         setProducts(tempProducts);
     }
 
+    const getStoreCustomer = async () => {
+        axios(
+            {
+                baseURL: "http://localhost:3001/api",
+                url: "customer/store",
+                headers: {
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                },
+                method: 'get'
+            }
+        )
+        .then((response) => {
+            setCustomer(response.data[0]);
+        })
+    }
+
     // Update displayed price on products list change
     useEffect(() => {
         var sub_temp = 0.00;
@@ -110,7 +128,10 @@ export default function TransactionHome(props) {
         setProducts([])
         setCustomer({})
 
+        // Load store customer
+        getStoreCustomer()
 
+        // Load sample products
         for (var i = 0; i < 15; i++) {
             const item = new SaleItem(mock_item)
             setProducts(previousInputs => [...previousInputs, item])
@@ -170,7 +191,7 @@ export default function TransactionHome(props) {
                             </Col>
                             <Col md="2">
                                 <Card style={{minWidth: '200px'}}>
-                                    <Card.Header><b>Customer</b></Card.Header>
+                                    <Card.Header><b>Customer ({customer.name})</b></Card.Header>
                                     <Card.Body>
                                         <div className='transaction-button-container'>
                                             <div>
