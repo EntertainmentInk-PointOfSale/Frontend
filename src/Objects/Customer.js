@@ -33,7 +33,7 @@ export default class Customer {
             try {
                 c[key] = value
             } catch(e) {
-                console.error(`\'${key}\' is NOT a valid Customer property`)
+                console.error(`'${key}' is NOT a valid Customer property`)
             }
         }
 

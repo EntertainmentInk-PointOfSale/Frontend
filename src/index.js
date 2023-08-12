@@ -15,7 +15,7 @@ import SearchProduct from './Routes/Product/SearchProduct';
 import AddProduct from './Routes/Product/AddProduct';
 
 // Transaction
-import TransactionHome from './Routes/Transaction/TransactionHome';
+import TransactionTabs from './Routes/Transaction/TransactionTabs';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/transaction',
-        element: <TransactionHome></TransactionHome>
+        element: <TransactionTabs/>
     }
 ])
 

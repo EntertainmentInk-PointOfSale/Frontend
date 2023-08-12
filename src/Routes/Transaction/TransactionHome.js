@@ -24,10 +24,9 @@ const mock_item = {lookup_code: '123456789', product_name: 'Other Product Produc
 
 
 export default function TransactionHome(props) {
-
     // Transaction states
     const [products, setProducts] = useState([]);
-    const [customer, setCustomer] = useState(Customer.Blank())
+    const [customer, setCustomer] = useState(props.customer)
 
     const [subtotal, setSubtotal] = useState(0.00);
     const [taxTotal, setTaxTotal] = useState(0.00);
@@ -88,23 +87,6 @@ export default function TransactionHome(props) {
         setProducts(tempProducts);
     }
 
-    const getStoreCustomer = async () => {
-        axios(
-            {
-                baseURL: "http://localhost:3001/api",
-                url: "customer/store",
-                headers: {
-                    'Access-Control-Allow-Origin' : '*',
-                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-                },
-                method: 'get'
-            }
-        )
-        .then((response) => {
-            setCustomer(Customer.Load(response.data[0]));
-        })
-    }
-
     // Update displayed price on products list change
     useEffect(() => {
         var sub_temp = 0.00;
@@ -126,10 +108,6 @@ export default function TransactionHome(props) {
     useEffect(() => {
         // Reset attributes
         setProducts([])
-        setCustomer({})
-
-        // Load store customer
-        getStoreCustomer()
 
         // Load sample products
         for (var i = 0; i < 15; i++) {
@@ -140,7 +118,7 @@ export default function TransactionHome(props) {
     }, [])
 
     return(
-        <App title="Transaction">
+        <>
             <CustomerModal show={showCustomerModal} setShow={setShowCustomerModal} />
 
             <Form onSubmit={handleSearch}>
@@ -238,6 +216,6 @@ export default function TransactionHome(props) {
                         </Row>
                 </Container>
             </Form>
-        </App>
+        </>
     )
 }
