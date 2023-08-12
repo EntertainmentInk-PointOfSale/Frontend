@@ -74,16 +74,18 @@ export default function TransactionTabs() {
 
     return (
         <App title="Transaction">
-            <Tabs
-                id="all_tabs"
-                activeKey={activeKey}
-                onSelect={(k) => updateActiveTab(k)}
-                transition={false}
-                className='mb-2'
-            >
-                {tabs.map(tab => <Tab key={tab.id} eventKey={tab.id} title={`${tab.customer.name}`}><TransactionHome customer={tab.customer}/></Tab>)}
-                <Tab key={'New'} eventKey={'new'} title={`➕`} tabClassName='last-item'/>
-            </Tabs>
+            <div className='container tab-div'>
+                <Tabs
+                    id="all_tabs"
+                    activeKey={activeKey}
+                    onSelect={(k) => updateActiveTab(k)}
+                    transition={false}
+                    className='mb-2'
+                >
+                    {tabs.map(tab => <Tab key={tab.id} eventKey={tab.id} title={`${tab.customer.name}`} tabClassName={`${activeKey === tab.id ? 'active-tab' : ''}`} ><TransactionHome customer={tab.customer}/></Tab>)}
+                    <Tab key={'New'} eventKey={'new'} title={`➕`} tabClassName={`last-item`}/>
+                </Tabs>
+            </div>
         </App>
     )
 }

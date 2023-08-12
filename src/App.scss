@@ -45,3 +45,12 @@
 .last-item {
     background-color: $contrast-color !important;
 }
+
+.tab-div {
+    padding: 10px;
+}
+
+.active-tab {
+    background-color: $active-color !important; 
+    color: white !important;
+}
