@@ -27,7 +27,7 @@ export function EditNotes(props) {
         event.preventDefault();
         axios(
             {
-                baseURL: "http://localhost:3001/api",
+                baseURL: "http://server:3001/api",
                 url: `customer/update_personal/${props.customer.ID}`,
                 headers: {
                     'Access-Control-Allow-Origin' : '*',

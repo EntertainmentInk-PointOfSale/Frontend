@@ -40,7 +40,7 @@ export default function TransactionHome(props) {
 
         axios(
             {
-                baseURL: "http://localhost:3001/api",
+                baseURL: "http://server:3001/api",
                 url: url,
                 headers: {
                     'Access-Control-Allow-Origin' : '*',

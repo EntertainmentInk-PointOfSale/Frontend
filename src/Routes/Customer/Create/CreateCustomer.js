@@ -20,7 +20,7 @@ export default function CreateCustomer() {
         
         axios(
             {
-                baseURL: "http://localhost:3001/api",
+                baseURL: "http://server:3001/api",
                 url: "customer/create",
                 headers: {
                     'Access-Control-Allow-Origin' : '*',

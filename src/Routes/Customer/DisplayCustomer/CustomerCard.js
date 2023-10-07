@@ -28,7 +28,7 @@ function CustomerCard(props) {
     useEffect(() => {
         axios(
             {
-                baseURL: "http://localhost:3001/api",
+                baseURL: "http://server:3001/api",
                 url: `customer/id/${id}`,
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
