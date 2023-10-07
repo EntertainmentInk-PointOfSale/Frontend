@@ -1,12 +1,12 @@
 import {React,useState,useEffect,} from 'react';
 import axios from 'axios';
-import App from '../../../App';
+import App from '../../App';
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import Moment from 'react-moment';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import CustomerTable from './CustomerTable'
+import CustomerTable from './util/CustomerTable'
 
 //Helper
 function formatPhoneNumber(phoneNumberString) {
@@ -22,41 +22,41 @@ function formatPhoneNumber(phoneNumberString) {
 const columns = [
     {
         header: "ID",
-        accessorKey: "ID"
+        accessorKey: "id"
     },
     {
         header: "Name",
-        accessorKey: "Name",
+        accessorKey: "name",
         enableMultiSorting: true
     },
     {
         header: "Join Date", //TODO: Create custom sorting function to sort by DATE
-        id: "Join_Date",
+        id: "join_date",
         accessorKey: "Join_Date",
         cell: props => <Moment date={props.row.original.Join_Date}  format="YYYY-MM-DD"></Moment>
     },
     {
         header: "Phone",
-        accessorKey: "Phone",
+        accessorKey: "phone",
         enableSorting: false,
-        cell: props => <span>{formatPhoneNumber(props.row.original.Phone) || props.row.original.Phone}</span>
+        cell: props => <span>{formatPhoneNumber(props.row.original.phone) || props.row.original.phone}</span>
     },
     {
         header: "Email",
-        accessorKey: "Email"
+        accessorKey: "email"
     },
     {
         header: "View",
-        id: "View_Customer",
+        id: "view_customer",
         enableSorting: false,
-        cell: props => <Button variant="secondary" size="sm" href={`/customer/id/${props.row.original.ID}`}><b>View</b></Button>
+        cell: props => <Button variant="secondary" size="sm" href={`/customer/id/${props.row.original.id}`}><b>View</b></Button>
         
     }
 ]
 
 //Default sorting
 const sorting = [
-    {id: 'Name', desc: false}
+    {id: 'name', desc: false}
 ]
 
 export default function SearchCustomer() {

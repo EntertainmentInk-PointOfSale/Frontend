@@ -30,7 +30,7 @@ const columns = [
     {
         header: "View",
         id: "view_customer",
-        cell: props => <Button variant="secondary" size="sm" href={`/product/${props.row.original.product_id}`}><b>View</b></Button>
+        cell: props => <Button variant="secondary" size="sm" href={`/product/${props.row.original.id}`}><b>View</b></Button>
     },
 ]
 

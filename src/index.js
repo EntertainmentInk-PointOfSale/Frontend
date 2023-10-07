@@ -1,15 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './index.css';
+import './index.scss';
 import Home from './Routes/Home/Home';
-import SearchCustomer from './Routes/Customer/SearchCustomer/SearchCustomer';
-import CustomerCard from './Routes/Customer/DisplayCustomer/CustomerCard';
-import CreateCustomer from './Routes/Customer/Create/CreateCustomer'
+
+// Customer
+import SearchCustomer from './Routes/Customer/SearchCustomer';
+import DisplayCustomer from './Routes/Customer/DisplayCustomer';
+import CreateCustomer from './Routes/Customer/CreateCustomer'
+
+// Products
+import DisplayProduct from './Routes/Product/DisplayProduct'
 import SearchProduct from './Routes/Product/SearchProduct';
 import AddProduct from './Routes/Product/AddProduct';
-import TransactionHome from './Routes/Transaction/TransactionHome';
-import DisplayProduct from './Routes/Product/DisplayProduct'
+
+// Transaction
+import TransactionTabs from './Routes/Transaction/TransactionTabs';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -28,7 +35,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/customer/id/:id",
-        element: <CustomerCard/>
+        element: <DisplayCustomer/>
     },
     {
         path: "/product",
@@ -44,7 +51,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/transaction',
-        element: <TransactionHome></TransactionHome>
+        element: <TransactionTabs/>
     }
 ])
 

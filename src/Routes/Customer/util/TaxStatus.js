@@ -14,47 +14,50 @@ export function DisplayTaxStatus(props) {
                 <tbody>
                     <tr>
                         <td className={styles.header_text}>Tax Exempt:</td>
-                        <td className={styles.value_text}>{props.customer.Tax_Exempt ? "Exempt" : "Not Exempt"}</td>
+                        <td className={styles.value_text}>{props.customer.tax_exempt ? "Exempt" : "Not Exempt"}</td>
                     </tr>
                     <tr>
                         <td className={styles.header_text}>Status ID</td>
                         <td className={styles.value_text}>
                             {
-                                !props.customer.Tax_Exempt ? 
+                                !props.customer.tax_exempt ? 
                                     "N/A" : 
-                                    (props.customer.Tax_Exempt_Number ? 
-                                            props.customer.Tax_Exempt_Number : 
+                                    (props.customer.tax_exempt_number ? 
+                                            props.customer.tax_exempt_number : 
                                             "")
                             }
                         </td>
                     </tr>
                 </tbody>
             </Table>
-            <div className="col text-center">
-                <Button type="button" variant="outline-primary" onClick={() => props.handleClickTax()}>Edit Status</Button>
-            </div>
+            {!props.customer.isStoreUser && 
+                <div className="col text-center">
+                    <Button type="button" variant="outline-primary" onClick={() => props.handleClickTax()}>Edit Status</Button>
+                </div>
+            }
+            
         </>
     )
 }
 
 export function EditTaxStatus(props) {
-    const [exemptStatus,setExemptStatus] = useState(props.customer.Tax_Exempt);
-    const [exemptNumber,setExemptNumber] = useState(props.customer.Tax_Exempt_Number);
+    const [exemptStatus,setExemptStatus] = useState(props.customer.tax_exempt);
+    const [exemptNumber,setExemptNumber] = useState(props.customer.tax_exempt_number);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         axios(
             {
                 baseURL: "http://server:3001/api",
-                url: `customer/update_personal/${props.customer.ID}`,
+                url: `customer/update_personal/${props.customer.id}`,
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
                     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
                 },
                 method: 'put',
                 data: {
-                    "Tax_Exempt":exemptStatus,
-                    "Tax_Exempt_Number":exemptNumber
+                    "tax_exempt":exemptStatus,
+                    "tax_exempt_number":exemptNumber
                 }
             }
         )
@@ -79,7 +82,7 @@ export function EditTaxStatus(props) {
                                     name="exempt_switch"
                                     type="switch"
                                     id="exempt-switch"
-                                    defaultChecked={props.customer.Tax_Exempt}
+                                    defaultChecked={props.customer.tax_exempt}
                                     onChange={() => {
                                         setExemptStatus(!exemptStatus)
                                     }}/>
@@ -92,7 +95,7 @@ export function EditTaxStatus(props) {
                                     name="exempt_number_box"
                                     size="sm" 
                                     type="text" 
-                                    defaultValue={props.customer.Tax_Exempt_Number}
+                                    defaultValue={props.customer.tax_exempt_number}
                                     onChange={(e) => {setExemptNumber(e.target.value)}}/>
                             </td>
                         </tr>

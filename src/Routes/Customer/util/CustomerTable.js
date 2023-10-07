@@ -20,11 +20,8 @@ export default function CustomerTable({data, columns, initialSorting}) {
         },
         onSortingChange: setSorting,
     })
-    useEffect(() => {
-        console.log(`new data: ${data}`)
-    },[data])
     return (
-        <Table size={"sm"} bordered hover responsive>
+        <Table size={"sm"} style={{tableLayout: 'fixed'}} bordered hover responsive>
             <thead>
             {table.getHeaderGroups().map(headerGroup => (
                 <tr key={headerGroup.id}>

@@ -15,51 +15,54 @@ export function DisplayPersonalDetail(props) {
                 <tbody>
                     <tr>
                         <td className={styles.header_text}>Name:</td>
-                        <td className={styles.value_text}>{props.customer.Name}</td>
+                        <td className={styles.value_text}>{props.customer.name}</td>
                     </tr>
                     <tr>
                         <td className={styles.header_text}>ID:</td>
-                        <td className={styles.value_text}>{props.customer.ID}</td>
+                        <td className={styles.value_text}>{props.customer.id}</td>
                     </tr>
                     <tr>
                         <td className={styles.header_text}>E-Mail:</td>
-                        <td className={styles.value_text}>{props.customer.Email}</td>
+                        <td className={styles.value_text}>{props.customer.email}</td>
                     </tr>
                     <tr>
                         <td className={styles.header_text}>Phone:</td>
-                        <td className={styles.value_text}>{props.customer.Phone}</td>
+                        <td className={styles.value_text}>{props.customer.phone}</td>
                     </tr>
                     <tr>
                         <td className={styles.header_text}>Join Date:</td>
                         <td className={styles.value_text}>
-                            <Moment date={props.customer.Join_Date}  format="YYYY-MM-DD"></Moment>
+                            <Moment date={props.customer.join_date}  format="YYYY-MM-DD"></Moment>
                         </td>
                     </tr>
                     <tr>
                         <td className={styles.header_text}>Status:</td>
-                        <td className={styles.value_text}>{props.customer.Active ? "Active" : "Not Active"}</td>
+                        <td className={styles.value_text}>{props.customer.active ? "Active" : "Not Active"}</td>
                     </tr>
                 </tbody>
             </Table>
-            <div className="d-grid gap-2">
-                <Button type="button" variant="outline-primary" size="lg" onClick={() => props.handlePersonalClick()}>Edit Details</Button>
-            </div> 
+            {!props.customer.isStoreUser &&
+                <div className="d-grid gap-2">
+                    <Button type="button" variant="outline-primary" size="lg" onClick={() => props.handlePersonalClick()}>Edit Details</Button>
+                </div> 
+            }
+
         </>
     ) 
 }
 
 export function EditPersonalDetail(props) {
 
-    const [Name,setName]     = useState(props.customer.Name);
-    const [Email,setEmail]   = useState(props.customer.Email);
-    const [Phone,setPhone]   = useState(props.customer.Phone);
-    const [Active,setActive] = useState(props.customer.Active); 
+    const [name,setName]     = useState(props.customer.name);
+    const [email,setEmail]   = useState(props.customer.email);
+    const [phone,setPhone]   = useState(props.customer.phone);
+    const [active,setActive] = useState(props.customer.active); 
 
     useEffect(() => {
-        setName(props.customer.Name);
-        setEmail(props.customer.Email);
-        setPhone(props.customer.Phone);
-        setActive(props.customer.Active);
+        setName(props.customer.name);
+        setEmail(props.customer.email);
+        setPhone(props.customer.phone);
+        setActive(props.customer.active);
     },[props.customer])
 
     const handleSubmit = (event) => {
@@ -74,10 +77,10 @@ export function EditPersonalDetail(props) {
                 },
                 method: 'put',
                 data: {
-                    "Name":   Name,
-                    "Email":  Email,
-                    "Phone":  Phone,
-                    "Active": Active
+                    "name":   name,
+                    "email":  email,
+                    "phone":  phone,
+                    "active": active
                 }
             }
         )
@@ -91,10 +94,10 @@ export function EditPersonalDetail(props) {
     }
 
     const cancelChange = () => {
-        setName(props.customer.Name);
-        setEmail(props.customer.Email);
-        setPhone(props.customer.Phone);
-        setActive(props.customer.Active);
+        setName(props.customer.name);
+        setEmail(props.customer.email);
+        setPhone(props.customer.phone);
+        setActive(props.customer.active);
         props.handlePersonalClick()
     }
 
@@ -110,13 +113,13 @@ export function EditPersonalDetail(props) {
                                     name="name_box"
                                     size="sm" 
                                     type="text" 
-                                    defaultValue={props.customer.Name}
+                                    defaultValue={props.customer.name}
                                     onChange={(e) => {setName(e.target.value)}}/>
                             </td>
                         </tr>
                         <tr>
                             <td className={styles.header_text}>ID:</td>
-                            <td className={styles.value_text}>{props.customer.ID}</td>
+                            <td className={styles.value_text}>{props.customer.id}</td>
                         </tr>
                         <tr>
                             <td className={styles.header_text}>E-Mail:</td>
@@ -125,7 +128,7 @@ export function EditPersonalDetail(props) {
                                     name="email_box"
                                     size="sm" 
                                     type="text" 
-                                    defaultValue={props.customer.Email}
+                                    defaultValue={props.customer.email}
                                     onChange={(e) => {setEmail(e.target.value)}}/>
                             </td>
                         </tr>
@@ -136,14 +139,14 @@ export function EditPersonalDetail(props) {
                                     name="phone_box"
                                     size="sm" 
                                     type="text" 
-                                    defaultValue={props.customer.Phone}
+                                    defaultValue={props.customer.phone}
                                     onChange={(e) => {setPhone(e.target.value)}}/>
                             </td>
                         </tr>
                         <tr>
                         <td className={styles.header_text}>Join Date:</td>
                         <td className={styles.value_text}>
-                            <Moment date={props.customer.Join_Date}  format="YYYY-MM-DD"></Moment>
+                            <Moment date={props.customer.join_date}  format="YYYY-MM-DD"></Moment>
                         </td>
                     </tr>
                         <tr>
@@ -153,9 +156,9 @@ export function EditPersonalDetail(props) {
                                     name="active_switch"
                                     type="switch"
                                     id="active-switch"
-                                    defaultChecked={props.customer.Active}
+                                    defaultChecked={props.customer.active}
                                     onChange={(e) => {
-                                        setActive(!Active)
+                                        setActive(!active)
                                     }}
                                 />
                             </td>

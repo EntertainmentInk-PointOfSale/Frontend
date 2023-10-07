@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import {flexRender, 
     getCoreRowModel,
@@ -23,12 +23,13 @@ const columns = [
                             indeterminate: props.row.getIsSomeSelected(),
                             onChange: props.row.getToggleSelectedHandler(),
                         }}
-                        /> 
-        
+                        />,
+        size: 10
     },
     {
         header: "Code",
         accessorKey: "lookup_code",
+        size: 60
     },
     {
         header: "Name",
@@ -37,14 +38,25 @@ const columns = [
     {
         header: "Tax",
         accessorKey: "tax_applied.tax_name",
+        size: 30
     },
     {
         header: "Price",
         accessorKey: "selling_price",
+        size: 60
     }
 ]
 
-export default function TransactionTable({data, rowSelection, setRowSelection}) {
+export default function TransactionTable({data, rowSelection, setRowSelection, scrollTo}) {
+
+    useEffect(() => {
+        let children = document.getElementById('transaction-body-div').getElementsByTagName("tr");
+
+        if(children.length > 0) {
+            children[children.length - 1].scrollIntoView();
+        }   
+    }, [scrollTo])
+
     const table = useReactTable({
         data,
         columns,
@@ -57,12 +69,12 @@ export default function TransactionTable({data, rowSelection, setRowSelection}) 
     })
 
     return (
-        <Table size={"sm"} hover responsive>
+        <Table size={"sm"} style={{borderCollapse: 'collapse'}} hover striped>
             <thead>
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr key={headerGroup.id}>
                     {headerGroup.headers.map(header => (
-                        <th key={header.id} style={{textAlign: 'center'}}>
+                        <th key={header.id} style={{borderRight: 'solid 1px #d3d3d3', borderBottom: 'solid 1px #d3d3d3', textAlign: 'center', width: header.getSize(),}}>
                             {
                                 flexRender(header.column.columnDef.header,header.getContext())
                             }
@@ -72,14 +84,14 @@ export default function TransactionTable({data, rowSelection, setRowSelection}) 
                 ))}
             </thead>
 
-            <tbody>
+            <tbody id='transaction-body-div'>
                 {
                     table.getRowModel().rows.map(row => (
-                        <tr key={row.id} style={{textAlign: 'center', margin: 'auto'}}>
+                        <tr key={row.id} style={{textAlign: 'center'}}>
                             {
                                 row.getAllCells().map(cell => (
-                                    <td key={cell.id}>
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    <td key={cell.id} style={{width: cell.column.getSize()}}>
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>
                                 ))
                             }
@@ -102,7 +114,7 @@ function IndeterminateCheckbox({
       if (typeof indeterminate === 'boolean') {
         ref.current.indeterminate = !rest.checked && indeterminate
       }
-    }, [ref, indeterminate])
+    }, [ref, indeterminate, rest.checked])
   
     return (
       <input

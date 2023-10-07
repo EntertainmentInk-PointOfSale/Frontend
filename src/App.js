@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss'
 import React, { Fragment, useEffect } from 'react'
 import {Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
