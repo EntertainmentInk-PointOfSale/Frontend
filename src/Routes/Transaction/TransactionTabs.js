@@ -80,7 +80,7 @@ export default function TransactionTabs() {
                     activeKey={activeKey}
                     onSelect={(k) => updateActiveTab(k)}
                     transition={false}
-                    className='mb-2'
+                    className='mb-2 tab-bar'
                 >
                     {tabs.map(tab => <Tab key={tab.id} eventKey={tab.id} title={`${tab.customer.name}`} tabClassName={`${activeKey === tab.id ? 'active-tab' : ''}`} ><TransactionHome customer={tab.customer}/></Tab>)}
                     <Tab key={'New'} eventKey={'new'} title={`➕`} tabClassName={`last-item`}/>

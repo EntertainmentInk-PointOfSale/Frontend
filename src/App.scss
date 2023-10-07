@@ -54,3 +54,14 @@
     background-color: $active-color !important; 
     color: white !important;
 }
+
+.tab-bar {
+    border-bottom: 0 !important;
+    gap: 5px;
+
+    button {
+        border-radius: 20px !important;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
