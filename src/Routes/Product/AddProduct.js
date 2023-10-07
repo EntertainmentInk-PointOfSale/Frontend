@@ -31,7 +31,7 @@ export default function AddProduct(props) {
         // Get all tax codes
         axios(
             {
-                baseURL: "http://server:3001/api",
+                baseURL: "http://localhost:3001/api",
                 url: "tax/",
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
@@ -51,7 +51,7 @@ export default function AddProduct(props) {
         // Get all Product Categories
         axios(
             {
-                baseURL: "http://server:3001/api",
+                baseURL: "http://localhost:3001/api",
                 url: "stockcategory/",
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
@@ -71,7 +71,7 @@ export default function AddProduct(props) {
         //Get all Suppliers
         axios(
             {
-                baseURL: "http://server:3001/api",
+                baseURL: "http://localhost:3001/api",
                 url: "supplier/",
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
@@ -94,7 +94,7 @@ export default function AddProduct(props) {
 
         axios(
             {
-                baseURL: "http://server:3001/api",
+                baseURL: "http://localhost:3001/api",
                 url: "product/create",
                 headers: {
                     'Access-Control-Allow-Origin' : '*',

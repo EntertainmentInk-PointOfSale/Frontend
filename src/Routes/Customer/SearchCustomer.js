@@ -76,7 +76,7 @@ export default function SearchCustomer() {
 
         axios(
             {
-                baseURL: "http://server:3001/api",
+                baseURL: "http://localhost:3001/api",
                 url: url,
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
@@ -100,7 +100,7 @@ export default function SearchCustomer() {
     useEffect(() => {
         axios(
             {
-                baseURL: "http://server:3001/api",
+                baseURL: "http://localhost:3001/api",
                 url: "customer/",
                 headers: {
                     'Access-Control-Allow-Origin' : '*',
